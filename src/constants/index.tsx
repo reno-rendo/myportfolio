@@ -211,15 +211,15 @@ const services: ServiceType[] = [
 
 const statsData: StatsType[] = [
   {
-    number: '30+',
+    number: '05+',
     label: 'Happy Clients',
   },
   {
-    number: '05+',
+    number: '02+',
     label: 'Years Of Experience',
   },
   {
-    number: '50+',
+    number: '10+',
     label: 'Projects Done',
   },
 ];
