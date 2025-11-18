@@ -13,7 +13,7 @@ export const Profile = () => {
         </div>
 
         <img
-          src='/Avatar.png'
+          src='/Avatar1.png'
           alt='Hafsa'
           className='lg:w-96 rounded-2xl object-cover'
         />

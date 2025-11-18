@@ -1,8 +1,3 @@
-/**
- * @copyright 2025 codewithsadee
- * @license Apache-2.0
- */
-
 import type { JSX } from 'react';
 
 export type ProjectType = {

@@ -107,37 +107,50 @@ const projectsData: ProjectType[] = [
 
 const education: ExperienceType[] = [
   {
-    year: '2018 – 2020',
-    title: 'Bachelor of Computer Science',
-    institute: 'National University of Technology',
-    desc: 'Focused on front-end development, UI design, and web application architecture.',
+    year: '2021 - 2025',
+    title: 'BSc (Hons) Information Technology',
+    institute: 'University of Kelaniya, Sri Lanka',
+    desc: 'Studyied software engineering, data structures, web technologies, and applied computing while working on academic projects and research.',
   },
-  {
-    year: '2021 – 2022',
-    title: 'Frontend Development Bootcamp',
-    institute: 'Udemy / Online Course',
-    desc: 'Learned modern JavaScript, React, and responsive UI patterns through real-world projects.',
-  },
-  {
-    year: '2023',
-    title: 'Advanced UI/UX Design Course',
-    institute: 'Design+Code',
-    desc: 'Explored advanced design systems, motion design, and accessibility best practices.',
-  },
+  // {
+  //   year: '2021 – 2022',
+  //   title: 'Frontend Development Bootcamp',
+  //   institute: 'Udemy / Online Course',
+  //   desc: 'Learned modern JavaScript, React, and responsive UI patterns through real-world projects.',
+  // },
+  // {
+  //   year: '2023',
+  //   title: 'Advanced UI/UX Design Course',
+  //   institute: 'Design+Code',
+  //   desc: 'Explored advanced design systems, motion design, and accessibility best practices.',
+  // },
 ];
 
 const experience: ExperienceType[] = [
   {
-    year: '2021 – 2022',
-    title: 'Frontend Developer Intern',
-    institute: 'PixelForge Studio',
-    desc: 'Built and optimized responsive websites, collaborating closely with designers and backend teams.',
+    year: '2025 Oct – Present',
+    title: 'Software Engineering Intern',
+    institute: 'X4 Digital Labs',
+    desc: 'Building production-grade UIs using React, Next.js, and Tailwind; handling PR reviews, refactoring work, and feature development in a fast-paced startup environment.',
   },
   {
-    year: '2022 – Present',
-    title: 'UI Engineer',
-    institute: 'Freelance / Remote Work',
-    desc: 'Designed and developed web interfaces for SaaS startups using React, Tailwind, and Figma.',
+    year: '2023 Sep - 2024 Mar',
+    title: 'Software Engineering Intern',
+    institute: 'London Stock Exchange Group (LSEG)',
+    desc: 'Collaborated on frontend features and real-time dashboards using React.js, enhancing user experience and data visualization.',
+  },
+  {
+    year: '2023 May – Present',
+    title: 'Data Annotator - Team Lead',
+    institute:
+      ' Data Annotation Project In collaboration with the University of Melbourne and the University of Kelaniya.',
+    desc: 'Led a team in developing AI-driven solutions for optimizing recycling processes through data annotation and preprocessing.',
+  },
+  {
+    year: '2023 Dec – Present',
+    title: 'Freelance Developer',
+    institute: 'Remote.',
+    desc: 'Designed and developed full-stack projects including LMS platforms, weather apps, and custom UI components using Java, React, PostgreSQL, and cloud tools.',
   },
 ];
 
@@ -201,12 +214,12 @@ const services: ServiceType[] = [
     projects: '21 Projects',
     icon: <Smartphone className='h-6 w-6 text-green-400' />,
   },
-  {
-    title: 'Product Launch Strategy',
-    desc: 'Helping startups prepare their digital products for launch with design systems, marketing pages, and assets.',
-    projects: '15 Projects',
-    icon: <Rocket className='h-6 w-6 text-green-400' />,
-  },
+  // {
+  //   title: 'Product Launch Strategy',
+  //   desc: 'Helping startups prepare their digital products for launch with design systems, marketing pages, and assets.',
+  //   projects: '15 Projects',
+  //   icon: <Rocket className='h-6 w-6 text-green-400' />,
+  // },
 ];
 
 const statsData: StatsType[] = [
