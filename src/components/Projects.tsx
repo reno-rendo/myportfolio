@@ -36,6 +36,7 @@ export const Projects = () => {
             projectLink={project.projectLink}
             tags={project.tags}
             title={project.title}
+            desc={project.desc}
           />
         ))}
       </motion.div>

@@ -10,7 +10,7 @@ export const ExpCard = ({ item }: { item: ExperienceType }) => {
       </span>
       <h3 className='text-lg font-semibold mt-1'>{item.title}</h3>
       <p className='font-medium text-foreground'>{item.institute}</p>
-      <p className='text-sm text-neutral-200'>{item.desc}</p>
+      <p className='text-md text-neutral-200'>{item.desc}</p>
     </div>
   );
 };

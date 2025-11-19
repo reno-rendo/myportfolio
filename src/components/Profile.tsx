@@ -14,7 +14,7 @@ export const Profile = () => {
 
         <img
           src='/Avatar1.png'
-          alt='Hafsa'
+          alt='Hafsa Aarifeen'
           className='lg:w-96 rounded-2xl object-cover'
         />
         <div className='mt-6'>
@@ -27,13 +27,15 @@ export const Profile = () => {
           <p className='text-lg capitalize'>Mawanella, Sri Lanka</p>
         </div>
 
-        <div className='flex gap-3 pt-2 text-neutral-500'>
+        <div className='flex gap-3 pt-2 justify-center text-neutral-500'>
           {socialLinks.map((social, i) => {
             const Icon = social.icon;
             return (
               <a
                 href={social.link}
                 key={i}
+                target='_blank'
+                rel='noopener noreferrer'
                 className='hover:text-primary border-2 border-neutral-500 p-2 rounded-full hover:border-primary transition duration-200'
               >
                 <Icon className='size-6' />

@@ -23,26 +23,39 @@ export const About = () => {
 
       <motion.p
         variants={fadeUp}
-        className='mt-2 text-neutral-300'
+        className='mt-4 text-lg text-neutral-100'
       >
-        Hello! I'm Hafsa Aarifeen, Full-stack developer focused on practical,
-        production-ready solutions — not demo-level code. Experienced with
-        React, Next.js, TypeScript, Java, and backend fundamentals (APIs, DB
-        design, SQL/PostgreSQL). <br /> <br />
-        Currently sharpening engineering depth through real-world frontend work:
-        UI architecture, form systems, validation, and API integration.
-        Comfortable working end-to-end: designing components, building scalable
-        logic, debugging edge cases, and tightening performance. Prior
-        experience includes a six-month internship at LSEG and ongoing work at
-        X4 Digital Labs, plus academic projects and published research.
-        Interested in building clean, maintainable systems and pushing beyond
-        “just making it work” toward reliable engineering.
+        I’m a full-stack developer who cares about building things that actually
+        work in production. I use React, Next.js, TypeScript, Java and solid
+        backend fundamentals, but tools aren’t the point — structure, clarity
+        and maintainability are.
+        <br /> <br />
+        My focus is on the parts of engineering people usually skip: clean
+        component architecture, predictable data flow, form logic that doesn’t
+        fall apart, sane API integration, and the small details that decide
+        whether a feature feels reliable or fragile. I’m comfortable taking
+        responsibility for the whole path from idea to working feature,
+        including the design and the debugging that happens when real users hit
+        unexpected paths. <br /> <br />
+        I built my foundation at LSEG and continue to sharpen it through real
+        project work at X4 Digital Labs, backed by academic projects and
+        published research. My instinct is to simplify messy problems, remove
+        unnecessary complexity and raise the standard instead of aiming for
+        “good enough.”
+        <br /> <br /> I’m here to build software that lasts, not quick
+        prototypes.
       </motion.p>
       <motion.div
         variants={fadeUp}
         transition={{ delay: 0.2 }}
       >
-        <Button className='mt-5'>Contact Me</Button>
+        <a
+          href='https://www.linkedin.com/in/hafsa-aarifeen/'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <Button className='mt-5'>Contact Me</Button>
+        </a>
       </motion.div>
     </motion.section>
   );

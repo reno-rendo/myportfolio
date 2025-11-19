@@ -5,6 +5,7 @@ export type ProjectType = {
   title: string;
   tags: string[];
   projectLink: string;
+  desc?: string;
 };
 
 export type ExperienceType = {

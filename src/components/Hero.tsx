@@ -42,7 +42,13 @@ export const Hero = () => {
           variant='outline'
           asChild
         >
-          <a href='#contact'>Download Resume</a>
+          <a
+            href='https://drive.google.com/file/d/1dN4RbPlDWUWICa-4vhE46YqTeDfzNgEB/view?usp=sharing'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            Download Resume
+          </a>
         </Button>
       </motion.div>
     </motion.section>

@@ -7,7 +7,7 @@ import type {
   ProjectType,
   ServiceType,
   StatsType,
-  TestimonialsType,
+  // TestimonialsType,
   ToolsType,
 } from '@/types/index';
 
@@ -16,21 +16,19 @@ import type {
  */
 import {
   Briefcase,
-  Facebook,
+  Linkedin,
+  Github,
+  MailPlus,
   FileText,
   Globe,
   Home,
-  Instagram,
   Layers,
   Mail,
   MessageCircle,
   Palette,
-  Rocket,
   Settings,
   Smartphone,
-  Twitter,
   User,
-  Youtube,
 } from 'lucide-react';
 
 const navLinks: LinksType[] = [
@@ -57,51 +55,50 @@ const navLinks: LinksType[] = [
 
 const socialLinks: LinksType[] = [
   {
-    icon: Facebook,
-    label: 'Facebook',
-    link: '/#',
+    icon: Linkedin,
+    label: 'Linkedin',
+    link: 'https://www.linkedin.com/in/hafsa-aarifeen/',
   },
   {
-    icon: Instagram,
-    label: 'Instagram',
-    link: '/#',
+    icon: Github,
+    label: 'Github',
+    link: 'https://github.com/hafsa-aarifeen',
   },
   {
-    icon: Twitter,
-    label: 'Twitter',
-    link: '/#',
-  },
-  {
-    icon: Youtube,
-    label: 'Youtube',
-    link: '/#',
+    icon: MailPlus,
+    label: 'Email',
+    link: 'mailto:hafsafathima016@gmail.com',
   },
 ];
 
 const projectsData: ProjectType[] = [
   {
-    imgSrc: '/images/project-ph-1.jpeg',
-    title: 'Full stack music app',
-    tags: ['API', 'Development'],
-    projectLink: 'https://musify-5al0.onrender.com/',
+    imgSrc: '/images/project1.jpg',
+    title: 'Learning Management System',
+    desc: 'A comprehensive platform for managing educational courses, assignments, and student progress.',
+    tags: ['React.js', 'Java', 'PostgreSQL'],
+    projectLink: 'https://github.com/hafsa-aarifeen/LMS-New',
   },
   {
-    imgSrc: '/images/project-ph-2.jpeg',
-    title: 'Full stack music app',
-    tags: ['API', 'Development'],
-    projectLink: 'https://musify-5al0.onrender.com/',
+    imgSrc: '/images/portfolio1.jfif',
+    title: 'Weather Forecast App',
+    desc: 'A web application that provides real-time weather updates and forecasts for any location worldwide.',
+    tags: ['React.js', 'REST APIs', 'TailwindCSS'],
+    projectLink: 'https://github.com/hafsa-aarifeen/weather-forcast-app',
   },
   {
-    imgSrc: '/images/project-ph-3.jpeg',
-    title: 'Full stack music app',
-    tags: ['API', 'Development'],
-    projectLink: 'https://musify-5al0.onrender.com/',
+    imgSrc: '/images/portfolio1.jfif',
+    title: 'Recipe App',
+    desc: 'A user-friendly app to discover, save, and share recipes with a vast collection of culinary delights.',
+    tags: ['Javascript', 'Reactjs', 'Spoonacular-API'],
+    projectLink: 'https://github.com/hafsa-aarifeen/Recipe-App',
   },
   {
-    imgSrc: '/images/project-ph-4.jpeg',
-    title: 'Full stack music app',
-    tags: ['API', 'Development'],
-    projectLink: 'https://musify-5al0.onrender.com/',
+    imgSrc: '/images/project1.jpg',
+    title: 'Content Summarizer',
+    desc: 'An AI-powered web app that summarizes lengthy articles into concise and informative summaries.',
+    tags: ['React.js', 'Node.js', 'OpenAI API', 'TailwindCSS'],
+    projectLink: 'https://mellifluous-dango-9bd778.netlify.app/',
   },
 ];
 
@@ -146,74 +143,107 @@ const experience: ExperienceType[] = [
       ' Data Annotation Project In collaboration with the University of Melbourne and the University of Kelaniya.',
     desc: 'Led a team in developing AI-driven solutions for optimizing recycling processes through data annotation and preprocessing.',
   },
-  {
-    year: '2023 Dec – Present',
-    title: 'Freelance Developer',
-    institute: 'Remote.',
-    desc: 'Designed and developed full-stack projects including LMS platforms, weather apps, and custom UI components using Java, React, PostgreSQL, and cloud tools.',
-  },
+  // {
+  //   year: '2023 Dec – Present',
+  //   title: 'Freelance Developer',
+  //   institute: 'Remote.',
+  //   desc: 'Designed and developed full-stack projects including LMS platforms, weather apps, and custom UI components using Java, React, PostgreSQL, and cloud tools.',
+  // },
 ];
 
 const tools: ToolsType[] = [
   {
-    label: 'Figma',
-    imgSrc: '/images/tools/figma.svg',
-  },
-  {
-    label: 'CSS',
-    imgSrc: '/images/tools/css3.svg',
-  },
-  {
-    label: 'Tailwind CSS',
-    imgSrc: '/images/tools/tailwindcss.svg',
-  },
-  {
     label: 'React',
     imgSrc: '/images/tools/react.svg',
+  },
+  // {
+  //   label: 'Next.js',
+  //   imgSrc: '/images/tools/icons8-nextjs(1).svg',
+  // },
+  {
+    label: 'TypeScript',
+    imgSrc: '/images/tools/typescript.svg',
   },
   {
     label: 'JavaScript',
     imgSrc: '/images/tools/javascript.svg',
   },
   {
+    label: 'Tailwind CSS',
+    imgSrc: '/images/tools/tailwindcss.svg',
+  },
+  {
     label: 'Node.js',
     imgSrc: '/images/tools/nodejs.svg',
+  },
+  {
+    label: 'Java',
+    imgSrc: '/images/tools/java.svg',
+  },
+  {
+    label: 'spring Boot',
+    imgSrc: '/images/tools/springboot.svg',
+  },
+  {
+    label: 'Python',
+    imgSrc: '/images/tools/python.svg',
   },
   {
     label: 'Express.js',
     imgSrc: '/images/tools/expressjs.svg',
   },
   {
+    label: 'PostgreSQL',
+    imgSrc: '/images/tools/postgres.svg',
+  },
+  {
+    label: 'MySQL',
+    imgSrc: '/images/tools/mysql.svg',
+  },
+  {
     label: 'Mongodb',
     imgSrc: '/images/tools/mongodb.svg',
+  },
+  {
+    label: 'AWS',
+    imgSrc: '/images/tools/aws.svg',
+  },
+  {
+    label: 'GitHub',
+    imgSrc: '/images/tools/github.svg',
+  },
+  {
+    label: 'Postman',
+    imgSrc: '/images/tools/postman.svg',
   },
 ];
 
 const services: ServiceType[] = [
   {
-    title: 'Brand Identity',
-    desc: 'I craft modern visual identities that help brands stand out through strong typography, colors, and minimal design.',
-    projects: '32 Projects',
+    title: 'Full-Stack Application Development',
+    desc: 'Building complete web applications from frontend architecture to backend logic, ensuring clean structure, and reliable performance.',
+    projects: '35 Projects',
     icon: <Palette className='h-6 w-6 text-green-400' />,
   },
   {
-    title: 'UI/UX Design',
-    desc: 'Designing clean, intuitive, and user-friendly interfaces that improve user experience and boost conversions.',
-    projects: '47 Projects',
-    icon: <Layers className='h-6 w-6 text-green-400' />,
-  },
-  {
     title: 'Web Development',
-    desc: 'Building high-performance, SEO-friendly websites using Next.js, Tailwind, and modern web technologies.',
+    desc: 'Building responsive and dynamic websites using modern frameworks like React.js to deliver seamless user experiences.',
     projects: '58 Projects',
     icon: <Globe className='h-6 w-6 text-green-400' />,
   },
   {
+    title: 'Web Designing',
+    desc: 'Creating visually appealing and user-friendly web designs that align with brand identity and enhance user engagement.',
+    projects: '47 Projects',
+    icon: <Layers className='h-6 w-6 text-green-400' />,
+  },
+  {
     title: 'Mobile App Design',
-    desc: 'Creating pixel-perfect app interfaces optimized for both iOS and Android devices with smooth usability.',
+    desc: 'Designing intuitive and engaging mobile applications with a focus on user experience and modern design principles.',
     projects: '21 Projects',
     icon: <Smartphone className='h-6 w-6 text-green-400' />,
   },
+
   // {
   //   title: 'Product Launch Strategy',
   //   desc: 'Helping startups prepare their digital products for launch with design systems, marketing pages, and assets.',
@@ -223,10 +253,10 @@ const services: ServiceType[] = [
 ];
 
 const statsData: StatsType[] = [
-  {
-    number: '05+',
-    label: 'Happy Clients',
-  },
+  // {
+  //   number: '05+',
+  //   label: 'Happy Clients',
+  // },
   {
     number: '02+',
     label: 'Years Of Experience',
@@ -237,29 +267,29 @@ const statsData: StatsType[] = [
   },
 ];
 
-const testimonials: TestimonialsType[] = [
-  {
-    name: 'Alex Tomato',
-    role: 'Brand Manager at Instant Design',
-    image: 'https://randomuser.me/api/portraits/men/32.jpg',
-    text: 'Working with David was an absolute pleasure. His attention to detail, creative insights, and ability to translate complex ideas into stunning visuals truly set him apart. He consistently went above and beyond to ensure the project exceeded expectations.',
-    link: '#',
-  },
-  {
-    name: 'Sara Bloom',
-    role: 'Founder at Bloom Agency',
-    image: 'https://randomuser.me/api/portraits/women/65.jpg',
-    text: 'David brought my brand vision to life better than I could have imagined. He is not only professional and highly skilled but also incredibly responsive and collaborative. Every aspect of the project was handled with precision and creativity.',
-    link: '#',
-  },
-  {
-    name: 'John Park',
-    role: 'CEO at PixelFlow',
-    image: 'https://randomuser.me/api/portraits/men/45.jpg',
-    text: 'From UI/UX design to front-end implementation, David handled every detail flawlessly. His problem-solving skills, innovative approach, and dedication made the entire process smooth and enjoyable. I would highly recommend him for any design-driven project.',
-    link: '#',
-  },
-];
+// const testimonials: TestimonialsType[] = [
+//   {
+//     name: 'Alex Tomato',
+//     role: 'Brand Manager at Instant Design',
+//     image: 'https://randomuser.me/api/portraits/men/32.jpg',
+//     text: 'Working with David was an absolute pleasure. His attention to detail, creative insights, and ability to translate complex ideas into stunning visuals truly set him apart. He consistently went above and beyond to ensure the project exceeded expectations.',
+//     link: '#',
+//   },
+//   {
+//     name: 'Sara Bloom',
+//     role: 'Founder at Bloom Agency',
+//     image: 'https://randomuser.me/api/portraits/women/65.jpg',
+//     text: 'David brought my brand vision to life better than I could have imagined. He is not only professional and highly skilled but also incredibly responsive and collaborative. Every aspect of the project was handled with precision and creativity.',
+//     link: '#',
+//   },
+//   {
+//     name: 'John Park',
+//     role: 'CEO at PixelFlow',
+//     image: 'https://randomuser.me/api/portraits/men/45.jpg',
+//     text: 'From UI/UX design to front-end implementation, David handled every detail flawlessly. His problem-solving skills, innovative approach, and dedication made the entire process smooth and enjoyable. I would highly recommend him for any design-driven project.',
+//     link: '#',
+//   },
+// ];
 
 export {
   socialLinks,
@@ -270,5 +300,5 @@ export {
   services,
   navLinks,
   statsData,
-  testimonials,
+  // testimonials,
 };
