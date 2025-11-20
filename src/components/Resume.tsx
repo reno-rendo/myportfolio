@@ -31,11 +31,12 @@ export const Resume = () => {
         With a background in Information Technology and hands-on experience
         across frontend engineering, research, and real-world product
         development, I’ve worked on projects ranging from internal dashboards to
-        full-stack applications. My roles—whether at LSEG, X4 Digital Labs, or
+        full-stack applications.
+        {/* My roles—whether at LSEG, X4 Digital Labs, or
         in academic research—have pushed me to build interfaces that are
         reliable, scalable, and genuinely useful. Every project has sharpened my
         focus on writing clean code, understanding system behavior, and
-        delivering user-centered solutions that actually solve problems.
+        delivering user-centered solutions that actually solve problems. */}
       </motion.p>
       <div className='grid gap-x-10 my-16 md:grid-cols-2'>
         <motion.div

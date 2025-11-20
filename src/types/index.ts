@@ -45,3 +45,17 @@ export type LinksType = {
   link: string;
   icon: React.ElementType;
 };
+
+export type PublicationType = {
+  title: string;
+  conference: string;
+  doi?: string;
+  description: string;
+};
+
+export type CertificationType = {
+  title: string;
+  awarded: string;
+  credentials: string;
+  imgSrc: string;
+};

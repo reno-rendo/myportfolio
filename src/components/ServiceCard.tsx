@@ -12,7 +12,7 @@ export const ServiceCard = ({ service }: { service: ServiceType }) => {
         </span> */}
       </div>
 
-      <div className='shrink-0'>{service.icon}</div>
+      {/* <div className='shrink-0'>{service.icon}</div> */}
     </div>
   );
 };

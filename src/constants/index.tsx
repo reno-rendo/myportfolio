@@ -5,8 +5,10 @@ import type {
   ExperienceType,
   LinksType,
   ProjectType,
+  PublicationType,
   ServiceType,
   StatsType,
+  CertificationType,
   // TestimonialsType,
   ToolsType,
 } from '@/types/index';
@@ -46,8 +48,8 @@ const navLinks: LinksType[] = [
   },
   { label: 'Resume', link: '#resume', icon: FileText },
   {
-    label: 'Reviews',
-    link: '#testimonials',
+    label: 'Acheivements',
+    link: '#acheivements',
     icon: MessageCircle,
   },
   { label: 'Contact', link: '#contact', icon: Mail },
@@ -252,6 +254,97 @@ const services: ServiceType[] = [
   // },
 ];
 
+const publications: PublicationType[] = [
+  {
+    title:
+      'Evaluating AI-Based Unit Testing Tools: A Focus on Usability, Reliability, and Integration',
+    conference:
+      '2025 5th International Conference on Advanced Research in Computing (ICARC)',
+    doi: '10.1109/ICARC64760.2025.10963099',
+    description:
+      'Empirical comparison of AI-based unit testing tools, focusing on usability, reliability, and integration challenges.',
+  },
+  {
+    title:
+      'Agent-Based Modeling of Surplus Food Management: A Social Entrepreneurship Approach to Reducing Waste and Enhancing Sustainability',
+    conference:
+      '2025 International Conference on Multidisciplinary Research (ICMR)',
+    description:
+      'Explores the integration of social entrepreneurship and agent-based modeling to address food waste and food insecurity.',
+  },
+];
+
+const certifications: CertificationType[] = [
+  {
+    title: 'React',
+    awarded: 'Meta Front-End Developer Certificate',
+    credentials:
+      'https://www.coursera.org/account/accomplishments/certificate/84DLDPE8QE5T',
+    imgSrc: '/images/cert/meta-icon.svg',
+  },
+  {
+    title: 'Oracle Database 19c: Advanced SQL',
+    awarded: ' LinkedIn',
+    credentials:
+      'https://www.linkedin.com/learning/certificates/cc1c76a8f2f0456c528048d6e57eee2608ea2ea29e2dd016cab152c621f03600?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bq785pZPJRoyT3yw7FwhJbg%3D%3D',
+    imgSrc: '/images/cert/linkedin.svg',
+  },
+  {
+    title: 'Java Certification Course',
+    awarded: 'Simplilearn',
+    credentials: 'https://simpli-web.app.link/e/j784W2jSrYb',
+    imgSrc: '/images/cert/Simplilearn_logo.png',
+  },
+  {
+    title: ' AWS Essential Training for Developers',
+    awarded: 'LinkedIn',
+    credentials:
+      'https://www.linkedin.com/learning/certificates/d98390268336b33c2d2112db75aa763b7d10c8bb9647cdf097b5c29169d8b59f?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bq785pZPJRoyT3yw7FwhJbg%3D%3D',
+    imgSrc: '/images/cert/linkedin.svg',
+  },
+  {
+    title: ' Postman API Fundamentals Student Expert',
+    awarded: 'Postman',
+    credentials:
+      'https://badges.parchment.com/public/assertions/FNw6FkwfSwWucjgpDXotew?identity__email=hafsama-im19042@stu.kln.ac.lk',
+    imgSrc: '/images/tools/postman.svg',
+  },
+  {
+    title: 'Agile Software Development',
+    awarded: 'LinkedIn (Project Management Institute)',
+    credentials:
+      'https://www.linkedin.com/learning/certificates/ca01f19db59308edceeab104b7aa896a8baa04e8e34e6748221b639eaf82850a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bq785pZPJRoyT3yw7FwhJbg%3D%3D',
+    imgSrc: '/images/cert/channels4_profile-removebg-preview.png',
+  },
+  {
+    title: ' Foundation of Project Management',
+    awarded: 'Google Project Management: Professional Certificate',
+    credentials: 'https://coursera.org/share/b88c85f2971ce9aed3304664ede4c950',
+    imgSrc: '/images/cert/google.svg',
+  },
+  {
+    title: ' Using Python for Automation',
+    awarded: 'LinkedIn',
+    credentials:
+      'https://www.linkedin.com/learning/certificates/b1b8c891434f3b4e1d6f1e35e693498e803edab7ff10ad37e65eb480fe8212c1?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bq785pZPJRoyT3yw7FwhJbg%3D%3D',
+    imgSrc: '/images/cert/linkedin.svg',
+  },
+  {
+    title: 'DevOps Foundations: CD/CI',
+    awarded: 'National Association of State Boards of Accountancy (NASBA)',
+    credentials:
+      'https://www.linkedin.com/learning/certificates/30763542e9c7f26d9b1ccc544231dd908b8210e7605cf7b74747658eb216e202?trk=share_certificate',
+    imgSrc: '/images/cert/NASBA_logo-1-removebg-preview.png',
+  },
+  {
+    title: 'AI Master Class',
+    awarded: 'Pantech.AI',
+    credentials:
+      'https://drive.google.com/file/d/1rR1t2VsGpbBifNqxws_9ABZ6J_Bt6S8N/view',
+    imgSrc: '/images/cert/ps-2.png',
+  },
+];
+
 const statsData: StatsType[] = [
   // {
   //   number: '05+',
@@ -300,5 +393,7 @@ export {
   services,
   navLinks,
   statsData,
+  publications,
+  certifications,
   // testimonials,
 };

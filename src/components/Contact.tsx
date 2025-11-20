@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion } from 'motion/react';
 
@@ -5,11 +6,8 @@ import { fadeUp } from '@/lib/animations';
 
 import { Form, FormControl, FormField, FormItem, FormMessage } from './ui/form';
 import { Input } from './ui/input';
-
 import { Textarea } from './ui/textarea';
-
 import { Button } from './ui/button';
-
 import { SectionHeader } from './SectionHeader';
 
 type ContactFormValues = {
@@ -21,6 +19,9 @@ type ContactFormValues = {
 };
 
 export const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
   const form = useForm<ContactFormValues>({
     defaultValues: {
       name: '',
@@ -31,8 +32,42 @@ export const Contact = () => {
     },
   });
 
-  const onSubmit = (values: ContactFormValues) => {
-    console.log(values);
+  // Auto-hide success message after 5 seconds
+  useEffect(() => {
+    if (isSuccess) {
+      const timer = setTimeout(() => {
+        setIsSuccess(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess]);
+
+  const onSubmit = async (values: ContactFormValues) => {
+    setIsSubmitting(true);
+    setIsSuccess(false);
+
+    const formUrl =
+      'https://docs.google.com/forms/d/e/1FAIpQLScNczRo9kn7Nv1n3Nnnunafw5jA0NDv_nOuajJPBTBs8_64lQ/formResponse';
+
+    const formData = new FormData();
+    formData.append('entry.504361379', values.name);
+    formData.append('entry.1061438495', values.company);
+    formData.append('entry.591074169', values.email);
+    formData.append('entry.1382094980', values.phone);
+    formData.append('entry.1046213113', values.message);
+
+    try {
+      await fetch(formUrl, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors',
+      });
+
+      form.reset();
+      setIsSuccess(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -55,6 +90,7 @@ export const Contact = () => {
           className='w-full mx-auto space-y-4 mt-10'
         >
           <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+            {/* Name */}
             <FormField
               control={form.control}
               name='name'
@@ -63,7 +99,7 @@ export const Contact = () => {
                   <FormControl>
                     <Input
                       placeholder='Your Name'
-                      className='border-0'
+                      className='border-0 h-12'
                       {...field}
                     />
                   </FormControl>
@@ -71,6 +107,8 @@ export const Contact = () => {
                 </FormItem>
               )}
             />
+
+            {/* Company */}
             <FormField
               control={form.control}
               name='company'
@@ -79,7 +117,7 @@ export const Contact = () => {
                   <FormControl>
                     <Input
                       placeholder='Your Company'
-                      className='border-0'
+                      className='border-0 h-12'
                       {...field}
                     />
                   </FormControl>
@@ -87,6 +125,8 @@ export const Contact = () => {
                 </FormItem>
               )}
             />
+
+            {/* Email */}
             <FormField
               control={form.control}
               name='email'
@@ -95,8 +135,8 @@ export const Contact = () => {
                   <FormControl>
                     <Input
                       type='email'
-                      placeholder='you@xample.com'
-                      className='border-0'
+                      placeholder='you@example.com'
+                      className='border-0 h-12'
                       {...field}
                     />
                   </FormControl>
@@ -104,6 +144,8 @@ export const Contact = () => {
                 </FormItem>
               )}
             />
+
+            {/* Phone */}
             <FormField
               control={form.control}
               name='phone'
@@ -113,7 +155,7 @@ export const Contact = () => {
                     <Input
                       type='tel'
                       placeholder='Your Phone Number'
-                      className='border-0'
+                      className='border-0 h-12'
                       {...field}
                     />
                   </FormControl>
@@ -122,6 +164,8 @@ export const Contact = () => {
               )}
             />
           </div>
+
+          {/* Message */}
           <FormField
             control={form.control}
             name='message'
@@ -138,12 +182,34 @@ export const Contact = () => {
               </FormItem>
             )}
           />
+
+          {/* Submit Button */}
           <Button
             type='submit'
             size='lg'
+            disabled={isSubmitting}
+            className='w-1/4 flex items-center justify-center gap-2'
           >
-            Send Message
+            {isSubmitting ? (
+              <>
+                <span className='h-4 w-4 animate-spin rounded-full border-2 border-t-transparent'></span>
+                Sending...
+              </>
+            ) : (
+              'Send Message'
+            )}
           </Button>
+
+          {/* Success Message */}
+          {isSuccess && (
+            <motion.div
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className='text-center text-sm text-green-400 font-medium mt-2'
+            >
+              Your message has been sent successfully!
+            </motion.div>
+          )}
         </form>
       </Form>
     </motion.section>

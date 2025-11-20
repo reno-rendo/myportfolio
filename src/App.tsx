@@ -8,6 +8,7 @@ import { About } from './components/About';
 import { Service } from './components/Service';
 import { Resume } from './components/Resume';
 import { Contact } from './components/Contact';
+import { Acheivements } from './components/Acheivements';
 
 export const App = () => {
   useEffect(() => {
@@ -27,6 +28,7 @@ export const App = () => {
       <About />
       <Service />
       <Resume />
+      <Acheivements />
       <Contact />
     </main>
   );
