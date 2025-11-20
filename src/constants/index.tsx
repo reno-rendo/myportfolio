@@ -280,7 +280,7 @@ const certifications: CertificationType[] = [
     awarded: 'Meta Front-End Developer Certificate',
     credentials:
       'https://www.coursera.org/account/accomplishments/certificate/84DLDPE8QE5T',
-    imgSrc: '/images/cert/meta-icon.svg',
+    imgSrc: '/images/cert/meta.svg',
   },
   {
     title: 'Oracle Database 19c: Advanced SQL',
@@ -293,7 +293,7 @@ const certifications: CertificationType[] = [
     title: 'Java Certification Course',
     awarded: 'Simplilearn',
     credentials: 'https://simpli-web.app.link/e/j784W2jSrYb',
-    imgSrc: '/images/cert/Simplilearn_logo.png',
+    imgSrc: '/images/cert/simplilearn.png',
   },
   {
     title: ' AWS Essential Training for Developers',
@@ -314,7 +314,7 @@ const certifications: CertificationType[] = [
     awarded: 'LinkedIn (Project Management Institute)',
     credentials:
       'https://www.linkedin.com/learning/certificates/ca01f19db59308edceeab104b7aa896a8baa04e8e34e6748221b639eaf82850a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bq785pZPJRoyT3yw7FwhJbg%3D%3D',
-    imgSrc: '/images/cert/channels4_profile-removebg-preview.png',
+    imgSrc: '/images/cert/pmi.png',
   },
   {
     title: ' Foundation of Project Management',
@@ -334,14 +334,14 @@ const certifications: CertificationType[] = [
     awarded: 'National Association of State Boards of Accountancy (NASBA)',
     credentials:
       'https://www.linkedin.com/learning/certificates/30763542e9c7f26d9b1ccc544231dd908b8210e7605cf7b74747658eb216e202?trk=share_certificate',
-    imgSrc: '/images/cert/NASBA_logo-1-removebg-preview.png',
+    imgSrc: '/images/cert/nasba.png',
   },
   {
     title: 'AI Master Class',
     awarded: 'Pantech.AI',
     credentials:
       'https://drive.google.com/file/d/1rR1t2VsGpbBifNqxws_9ABZ6J_Bt6S8N/view',
-    imgSrc: '/images/cert/ps-2.png',
+    imgSrc: '/images/cert/pantech.png',
   },
 ];
 
