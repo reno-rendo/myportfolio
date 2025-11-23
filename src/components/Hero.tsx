@@ -27,8 +27,11 @@ export const Hero = () => {
         variants={fadeUp}
         className='text-4xl md:text-5xl lg:text-6xl font-semibold capitalize mt-2 max-w-3xl md:leading-16'
       >
-        I'm <span className='text-primary'>Hafsa Aarifeen</span>, A passionate
-        Fullstack & Frontend Developer
+        I'm{' '}
+        <u>
+          <span className='text-primary'>Hafsa Aarifeen</span>
+        </u>
+        , A passionate Fullstack & Frontend Developer
       </motion.h1>
 
       <motion.div

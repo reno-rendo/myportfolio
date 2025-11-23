@@ -17,11 +17,25 @@ export const FloatingMenu = () => {
             href={link.link}
             onClick={() => setActive(link.link)}
             className={cn(
-              'text-neutral-400 flex items-center gap-2 hover:text-primary transition-colors duration-200 mb-6 px-4',
+              'group relative text-neutral-400 flex items-center justify-center hover:text-primary transition-colors duration-200 mb-6 px-4',
               active === link.link && 'text-primary',
             )}
           >
             <Icon className='size-5' />
+
+            {/* Tooltip label */}
+            <span
+              className='
+    pointer-events-none absolute right-full mr-3
+    whitespace-nowrap text-sm text-black bg-white
+    px-2 py-1 rounded-md shadow-md
+    opacity-0 translate-x-2
+    group-hover:opacity-100 group-hover:translate-x-0
+    transition-all duration-200
+  '
+            >
+              {link.label}
+            </span>
           </a>
         );
       })}

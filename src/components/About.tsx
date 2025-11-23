@@ -23,27 +23,21 @@ export const About = () => {
 
       <motion.p
         variants={fadeUp}
-        className='mt-4 text-lg text-neutral-100'
+        className='mt-4 text-xl text-neutral-100'
       >
-        I’m a full-stack developer who cares about building things that actually
-        work in production. I use React, Next.js, TypeScript, Java and solid
-        backend fundamentals, but tools aren’t the point — structure, clarity
-        and maintainability are.
+        I’m a full-stack developer who builds simple, stable and easy-to-use
+        features. I’m not great at everything, but I learn fast and I care about
+        doing things properly.
         <br /> <br />
-        My focus is on the parts of engineering people usually skip: clean
-        component architecture, predictable data flow, form logic that doesn’t
-        fall apart, sane API integration, and the small details that decide
-        whether a feature feels reliable or fragile. I’m comfortable taking
-        responsibility for the whole path from idea to working feature,
-        including the design and the debugging that happens when real users hit
-        unexpected paths. <br /> <br />
-        I built my foundation at LSEG and continue to sharpen it through real
-        project work at X4 Digital Labs, backed by academic projects and
-        published research. My instinct is to simplify messy problems, remove
-        unnecessary complexity and raise the standard instead of aiming for
-        “good enough.”
-        <br /> <br /> I’m here to build software that lasts, not quick
-        prototypes.
+        Real projects taught me something important: good software comes from
+        clear thinking and fixing one problem at a time. No shortcuts.
+        <br />
+        <br />
+        What drives me is simple. When someone uses something I built and it
+        “just works,” that’s enough. That’s what keeps me improving and aiming
+        to build software that lasts.
+        <br /> <br />
+        I’m here to build software that lasts, not quick prototypes.
       </motion.p>
       <motion.div
         variants={fadeUp}
