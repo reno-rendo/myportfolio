@@ -6,7 +6,7 @@ import type { ProjectType } from '@/types';
 export const ProjectCard = ({
   imgSrc,
   projectLink,
-  desc,
+  // desc,
   tags,
   title,
 }: ProjectType) => {
