@@ -10,9 +10,9 @@ export const Acheivements = () => {
     <motion.section
       initial='hidden'
       whileInView='visible'
-      viewport={{ once: true, amount: 0.1 }} // smaller threshold
+      viewport={{ once: true, amount: 0.3 }}
       variants={staggerContainer(0)}
-      className='mt-20 scroll-mt-28' // bigger scroll margin
+      className='mt-12 scroll-mt-10 px-2 sm:px-4'
       id='achievements'
     >
       <SectionHeader
@@ -20,17 +20,19 @@ export const Acheivements = () => {
         title='Research Publications'
       />
 
+      {/* Publications Grid */}
       <motion.div
         initial='hidden'
         whileInView='visible'
         viewport={{ once: true, amount: 0.3 }}
         variants={staggerContainer(0.4)}
-        className='grid md:grid-cols-2 gap-10 mt-10'
+        className='grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mt-8'
       >
         {publications.map((publication) => (
           <motion.div
             key={publication.title}
             variants={fadeUp}
+            className='w-full'
           >
             <PublicationCard publication={publication} />
           </motion.div>
@@ -44,7 +46,7 @@ export const Acheivements = () => {
       >
         <motion.h2
           variants={fadeUp}
-          className='text-3xl font-semibold mb-8 capitalize'
+          className='text-2xl sm:text-3xl font-semibold mb-6 capitalize'
         >
           Certifications
         </motion.h2>
@@ -54,13 +56,13 @@ export const Acheivements = () => {
           whileInView='visible'
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer(0.5)}
-          className='grid grid-cols-1 sm:grid-cols-2 gap-8 auto-rows-fr'
+          className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 auto-rows-fr'
         >
           {certifications.map((cert, i) => (
             <motion.div
               key={i}
               variants={fadeUp}
-              className='h-full'
+              className='w-full'
             >
               <CertificationCard cert={cert} />
             </motion.div>

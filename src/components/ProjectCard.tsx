@@ -29,9 +29,9 @@ export const ProjectCard = ({
           {title}
         </h3>
 
-        <p className='mt-3 text-white/90 text-md max-w-md line-clamp-3'>
+        {/* <p className='mt-3 text-white/90 text-md max-w-md line-clamp-3'>
           {desc}
-        </p>
+        </p> */}
 
         <div className='flex flex-wrap gap-2 mt-4'>
           {tags.map((tag, i) => (
