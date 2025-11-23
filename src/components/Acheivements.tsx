@@ -10,9 +10,9 @@ export const Acheivements = () => {
     <motion.section
       initial='hidden'
       whileInView='visible'
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.1 }} // smaller threshold
       variants={staggerContainer(0)}
-      className='mt-20 scroll-mt-10'
+      className='mt-20 scroll-mt-28' // bigger scroll margin
       id='achievements'
     >
       <SectionHeader
