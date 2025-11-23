@@ -7,7 +7,7 @@ import { navLinks } from '@/constants';
 export const FloatingMenu = () => {
   const [active, setActive] = useState('#hero');
   return (
-    <div className='fixed right-10 top-1/2 -translate-y-1/2 bg-black border border-neutral-600 pt-4 rounded-full z-10 hidden lg:block'>
+    <div className='fixed right-10 top-1/2 -translate-y-1/2 bg-black border border-neutral-500 pt-4 rounded-full z-10 hidden lg:block'>
       {navLinks.map((link) => {
         const Icon = link.icon;
 

@@ -27,7 +27,7 @@ export const PublicationCard = ({
             target='_blank'
             rel='noopener noreferrer'
             className='inline-flex items-center gap-2 px-4 py-2 rounded-md
-                 bg-white text-black font-medium shadow
+                 bg-primary text-black font-medium shadow
                  hover:scale-105 transition'
           >
             Read Full Paper

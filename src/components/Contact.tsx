@@ -98,8 +98,8 @@ export const Contact = () => {
                 <FormItem className='w-full'>
                   <FormControl>
                     <Input
-                      placeholder='Your Name'
-                      className='border-0 h-12'
+                      placeholder='Name'
+                      className='border-2 h-12'
                       {...field}
                     />
                   </FormControl>
@@ -116,8 +116,8 @@ export const Contact = () => {
                 <FormItem className='w-full'>
                   <FormControl>
                     <Input
-                      placeholder='Your Company'
-                      className='border-0 h-12'
+                      placeholder='Company'
+                      className='border-2 h-12'
                       {...field}
                     />
                   </FormControl>
@@ -135,8 +135,8 @@ export const Contact = () => {
                   <FormControl>
                     <Input
                       type='email'
-                      placeholder='you@example.com'
-                      className='border-0 h-12'
+                      placeholder='Email'
+                      className='border-2 h-12'
                       {...field}
                     />
                   </FormControl>
@@ -154,8 +154,8 @@ export const Contact = () => {
                   <FormControl>
                     <Input
                       type='tel'
-                      placeholder='Your Phone Number'
-                      className='border-0 h-12'
+                      placeholder='Phone Number'
+                      className='border-2 h-12'
                       {...field}
                     />
                   </FormControl>
@@ -175,7 +175,7 @@ export const Contact = () => {
                   <Textarea
                     {...field}
                     placeholder='Write your message...'
-                    className='h-36 border-0'
+                    className='h-36 border-2'
                   />
                 </FormControl>
                 <FormMessage />

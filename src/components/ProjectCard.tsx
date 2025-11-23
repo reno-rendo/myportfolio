@@ -13,29 +13,27 @@ export const ProjectCard = ({
   return (
     <motion.div
       variants={fadeUp}
-      className='relative rounded-2xl overflow-hidden group cursor-pointer shadow-md scale-100'
+      className='relative rounded-2xl overflow-hidden group cursor-pointer shadow-md
+             aspect-[3/2] md:aspect-[16/9] w-full'
     >
-      {/* Background Image */}
       <img
         src={imgSrc}
         alt={title}
         className='w-full h-full object-cover transition-transform duration-700 group-hover:scale-110'
       />
 
-      {/* Overlay */}
-      <div className='absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-500'></div>
+      <div className='absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-all duration-500' />
 
-      {/* Text Content */}
-      <div className='absolute inset-0 flex flex-col items-center justify-center text-center px-6'>
+      <div className='absolute inset-0 flex flex-col items-center justify-center text-center px-6 overflow-hidden'>
         <h3 className='text-2xl font-bold text-white drop-shadow-md'>
           {title}
         </h3>
 
-        <br />
+        <p className='mt-3 text-white/90 text-md max-w-md line-clamp-3'>
+          {desc}
+        </p>
 
-        {desc && <p className='mt-2 text-white/90 text-md max-w-md'>{desc}</p>}
-        <br />
-        <div className='flex flex-wrap gap-2 mt-2'>
+        <div className='flex flex-wrap gap-2 mt-4'>
           {tags.map((tag, i) => (
             <span
               key={i}
@@ -46,7 +44,6 @@ export const ProjectCard = ({
           ))}
         </div>
 
-        {/* Icon Button */}
         <a
           href={projectLink}
           target='_blank'

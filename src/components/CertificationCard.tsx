@@ -22,7 +22,7 @@ export const CertificationCard = ({ cert }: { cert: any }) => {
       <div className='flex flex-col justify-between flex-1 text-center sm:text-left'>
         <div>
           <h3 className='text-lg font-semibold text-white'>{cert.title}</h3>
-          <p className='text-neutral-400 text-sm mt-1 leading-5'>
+          <p className='text-neutral-400 text-md mt-1 leading-5'>
             {/* Awarded by  */}
             <span className='font-medium'>{cert.awarded}</span>
           </p>
@@ -33,7 +33,7 @@ export const CertificationCard = ({ cert }: { cert: any }) => {
             href={cert.credentials}
             target='_blank'
             rel='noopener noreferrer'
-            className='mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white text-black font-medium shadow hover:scale-105 transition w-full sm:w-fit mx-auto sm:mx-0 justify-center'
+            className='mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-black font-medium shadow hover:scale-105 transition w-full sm:w-fit mx-auto sm:mx-0 justify-center'
           >
             View Credentials
             <ExternalLink size={16} />

@@ -13,7 +13,7 @@ export const Acheivements = () => {
       viewport={{ once: true, amount: 0.3 }}
       variants={staggerContainer(0)}
       className='mt-20 scroll-mt-10'
-      id='publications'
+      id='achievements'
     >
       <SectionHeader
         subtitle='Acheivements'

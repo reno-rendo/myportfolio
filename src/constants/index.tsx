@@ -17,7 +17,6 @@ import type {
  * Assets
  */
 import {
-  Briefcase,
   Linkedin,
   Github,
   MailPlus,
@@ -26,11 +25,12 @@ import {
   Home,
   Layers,
   Mail,
-  MessageCircle,
   Palette,
   Settings,
   Smartphone,
   User,
+  Trophy,
+  FolderOpen,
 } from 'lucide-react';
 
 const navLinks: LinksType[] = [
@@ -38,7 +38,7 @@ const navLinks: LinksType[] = [
   {
     label: 'Projects',
     link: '#projects',
-    icon: Briefcase,
+    icon: FolderOpen,
   },
   { label: 'About', link: '#about', icon: User },
   {
@@ -48,9 +48,9 @@ const navLinks: LinksType[] = [
   },
   { label: 'Resume', link: '#resume', icon: FileText },
   {
-    label: 'Acheivements',
-    link: '#acheivements',
-    icon: MessageCircle,
+    label: 'Achievements',
+    link: '#achievements',
+    icon: Trophy,
   },
   { label: 'Contact', link: '#contact', icon: Mail },
 ];
@@ -296,13 +296,6 @@ const certifications: CertificationType[] = [
     imgSrc: '/images/cert/simplilearn.png',
   },
   {
-    title: ' AWS Essential Training for Developers',
-    awarded: 'LinkedIn',
-    credentials:
-      'https://www.linkedin.com/learning/certificates/d98390268336b33c2d2112db75aa763b7d10c8bb9647cdf097b5c29169d8b59f?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bq785pZPJRoyT3yw7FwhJbg%3D%3D',
-    imgSrc: '/images/cert/linkedin.svg',
-  },
-  {
     title: ' Postman API Fundamentals Student Expert',
     awarded: 'Postman',
     credentials:
@@ -310,8 +303,16 @@ const certifications: CertificationType[] = [
     imgSrc: '/images/tools/postman.svg',
   },
   {
+    title: ' AWS Essential Training for Developers',
+    awarded: 'LinkedIn',
+    credentials:
+      'https://www.linkedin.com/learning/certificates/d98390268336b33c2d2112db75aa763b7d10c8bb9647cdf097b5c29169d8b59f?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bq785pZPJRoyT3yw7FwhJbg%3D%3D',
+    imgSrc: '/images/cert/linkedin.svg',
+  },
+
+  {
     title: 'Agile Software Development',
-    awarded: 'LinkedIn (Project Management Institute)',
+    awarded: 'Project Management Institute',
     credentials:
       'https://www.linkedin.com/learning/certificates/ca01f19db59308edceeab104b7aa896a8baa04e8e34e6748221b639eaf82850a?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bq785pZPJRoyT3yw7FwhJbg%3D%3D',
     imgSrc: '/images/cert/pmi.png',
@@ -322,27 +323,27 @@ const certifications: CertificationType[] = [
     credentials: 'https://coursera.org/share/b88c85f2971ce9aed3304664ede4c950',
     imgSrc: '/images/cert/google.svg',
   },
-  {
-    title: ' Using Python for Automation',
-    awarded: 'LinkedIn',
-    credentials:
-      'https://www.linkedin.com/learning/certificates/b1b8c891434f3b4e1d6f1e35e693498e803edab7ff10ad37e65eb480fe8212c1?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bq785pZPJRoyT3yw7FwhJbg%3D%3D',
-    imgSrc: '/images/cert/linkedin.svg',
-  },
-  {
-    title: 'DevOps Foundations: CD/CI',
-    awarded: 'National Association of State Boards of Accountancy (NASBA)',
-    credentials:
-      'https://www.linkedin.com/learning/certificates/30763542e9c7f26d9b1ccc544231dd908b8210e7605cf7b74747658eb216e202?trk=share_certificate',
-    imgSrc: '/images/cert/nasba.png',
-  },
-  {
-    title: 'AI Master Class',
-    awarded: 'Pantech.AI',
-    credentials:
-      'https://drive.google.com/file/d/1rR1t2VsGpbBifNqxws_9ABZ6J_Bt6S8N/view',
-    imgSrc: '/images/cert/pantech.png',
-  },
+  // {
+  //   title: ' Using Python for Automation',
+  //   awarded: 'LinkedIn',
+  //   credentials:
+  //     'https://www.linkedin.com/learning/certificates/b1b8c891434f3b4e1d6f1e35e693498e803edab7ff10ad37e65eb480fe8212c1?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3Bq785pZPJRoyT3yw7FwhJbg%3D%3D',
+  //   imgSrc: '/images/cert/linkedin.svg',
+  // },
+  // {
+  //   title: 'DevOps Foundations: CD/CI',
+  //   awarded: 'National Association of State Boards of Accountancy (NASBA)',
+  //   credentials:
+  //     'https://www.linkedin.com/learning/certificates/30763542e9c7f26d9b1ccc544231dd908b8210e7605cf7b74747658eb216e202?trk=share_certificate',
+  //   imgSrc: '/images/cert/nasba.png',
+  // },
+  // {
+  //   title: 'AI Master Class',
+  //   awarded: 'Pantech.AI',
+  //   credentials:
+  //     'https://drive.google.com/file/d/1rR1t2VsGpbBifNqxws_9ABZ6J_Bt6S8N/view',
+  //   imgSrc: '/images/cert/pantech.png',
+  // },
 ];
 
 const statsData: StatsType[] = [
