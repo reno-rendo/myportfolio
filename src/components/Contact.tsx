@@ -188,7 +188,7 @@ export const Contact = () => {
             type='submit'
             size='lg'
             disabled={isSubmitting}
-            className='w-1/4 flex items-center justify-center gap-2'
+            className='w-1/3 flex items-center justify-center gap-2'
           >
             {isSubmitting ? (
               <>
