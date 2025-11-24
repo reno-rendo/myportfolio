@@ -47,7 +47,7 @@ export const Profile = () => {
           className='mt-2'
           size='lg'
         >
-          Let's Work
+          <a href='#contact'>Let's Work</a>
         </Button>
       </div>
     </aside>
