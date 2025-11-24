@@ -8,13 +8,19 @@ export const ToolsCard = ({ tool }: { tool: ToolsType }) => {
   return (
     <motion.div
       variants={fadeUp}
-      className='border border-neutral-700 rounded-md flex justify-center items-center flex-col py-4'
+      className='
+        flex flex-col items-center justify-center
+        rounded-2xl border border-neutral-700
+        px-4 py-4 transition-all duration-300
+        hover:bg-zinc-900 hover:border-primary
+      '
     >
       <img
         src={tool.imgSrc}
         alt={tool.label}
+        className='h-12 w-12 object-contain'
       />
-      <p className='font-bold mt-2'>{tool.label}</p>
+      <p className='font-bold mt-3 text-white'>{tool.label}</p>
     </motion.div>
   );
 };
