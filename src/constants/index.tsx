@@ -222,26 +222,26 @@ const tools: ToolsType[] = [
 
 const services: ServiceType[] = [
   {
-    title: 'Full-Stack Application Development',
-    desc: 'Building complete web applications from frontend architecture to backend logic, ensuring clean structure, and reliable performance.',
+    title: 'Full-Stack Development',
+    desc: 'I build complete features end to end, covering frontend, backend, APIs and deployment. My focus is delivering working functionality that holds up in real use.',
     projects: '35 Projects',
     icon: <Palette className='h-6 w-6 text-green-400' />,
   },
   {
-    title: 'Web Development',
-    desc: 'Building responsive and dynamic websites using modern frameworks like React.js to deliver seamless user experiences.',
+    title: 'Frontend Engineering',
+    desc: 'I implement smooth, consistent user interfaces using React and TypeScript. I care about clean structure, predictable behavior and components that scale with the project.',
     projects: '58 Projects',
     icon: <Globe className='h-6 w-6 text-green-400' />,
   },
   {
-    title: 'Web Designing',
-    desc: 'Creating visually appealing and user-friendly web designs that align with brand identity and enhance user engagement.',
+    title: 'Backend Engineering',
+    desc: 'I design clear data models and implement reliable server logic in Java or Node. I create REST APIs that stay easy to maintain and easy for the frontend to consume.',
     projects: '47 Projects',
     icon: <Layers className='h-6 w-6 text-green-400' />,
   },
   {
-    title: 'Mobile App Design',
-    desc: 'Designing intuitive and engaging mobile applications with a focus on user experience and modern design principles.',
+    title: 'Database and Data Workflows',
+    desc: 'I work with SQL databases, write optimized queries and handle the data layer so the application performs well and stays stable as it grows.',
     projects: '21 Projects',
     icon: <Smartphone className='h-6 w-6 text-green-400' />,
   },
