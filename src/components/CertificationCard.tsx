@@ -36,7 +36,7 @@ export const CertificationCard = ({ cert }: { cert: any }) => {
           </p>
         </div>
 
-        {cert.credentials && (
+        {/* {cert.credentials && (
           <a
             href={cert.credentials}
             target='_blank'
@@ -51,7 +51,7 @@ export const CertificationCard = ({ cert }: { cert: any }) => {
             View Credentials
             <ExternalLink size={16} />
           </a>
-        )}
+        )} */}
       </div>
     </div>
   );

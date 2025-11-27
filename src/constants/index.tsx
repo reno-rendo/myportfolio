@@ -59,57 +59,57 @@ const socialLinks: LinksType[] = [
   {
     icon: Linkedin,
     label: 'Linkedin',
-    link: 'https://www.linkedin.com/in/hafsa-aarifeen/',
+    link: 'https://www.linkedin.com/in/reno-rendo-073034304/',
   },
   {
     icon: Github,
     label: 'Github',
-    link: 'https://github.com/hafsa-aarifeen',
+    link: 'https://github.com/reno-rendo',
   },
   {
     icon: MailPlus,
     label: 'Email',
-    link: 'mailto:hafsafathima016@gmail.com',
+    link: 'ggrignionrendo@gmail.com',
   },
 ];
 
 const projectsData: ProjectType[] = [
   {
     imgSrc: '/images/project1.jpg',
-    title: 'Learning Management System',
+    title: 'National Police Personnel Data Search System',
     desc: 'A comprehensive platform for managing educational courses, assignments, and student progress.',
-    tags: ['React.js', 'Java', 'PostgreSQL'],
-    projectLink: 'https://github.com/hafsa-aarifeen/LMS-New',
+    tags: ['Html'],
+    projectLink: 'https://github.com/reno-rendo/npd-search-system',
   },
   {
     imgSrc: '/images/portfolio1.jfif',
-    title: 'Weather Forecast App',
+    title: 'NGSPAM',
     desc: 'A web application that provides real-time weather updates and forecasts for any location worldwide.',
-    tags: ['React.js', 'REST APIs', 'TailwindCSS'],
-    projectLink: 'https://github.com/hafsa-aarifeen/weather-forcast-app',
+    tags: ['python'],
+    projectLink: 'https://github.com/reno-rendo/nglspam-advence',
   },
   {
-    imgSrc: '/images/portfolio1.jfif',
-    title: 'Recipe App',
+    imgSrc: '/images/ui.jpg',
+    title: 'Travel app design',
     desc: 'A user-friendly app to discover, save, and share recipes with a vast collection of culinary delights.',
-    tags: ['Javascript', 'Reactjs', 'Spoonacular-API'],
-    projectLink: 'https://github.com/hafsa-aarifeen/Recipe-App',
+    tags: ['Figma'],
+    projectLink: 'https://www.instagram.com/p/DKbWtohh5y3/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
   },
   {
-    imgSrc: '/images/project1.jpg',
-    title: 'Content Summarizer',
+    imgSrc: '/images/ui1.jpg',
+    title: 'Mamuli modern design',
     desc: 'An AI-powered web app that summarizes lengthy articles into concise and informative summaries.',
-    tags: ['React.js', 'Node.js', 'OpenAI API', 'TailwindCSS'],
-    projectLink: 'https://mellifluous-dango-9bd778.netlify.app/',
+    tags: ['Figma'],
+    projectLink: 'https://www.instagram.com/p/DKNSdGGBBlu/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==',
   },
 ];
 
 const education: ExperienceType[] = [
   {
-    year: '2021 - 2025',
-    title: 'BSc (Hons) Information Technology',
-    institute: 'University of Kelaniya, Sri Lanka',
-    desc: 'Studyied software engineering, data structures, web technologies, and applied computing while working on academic projects and research.',
+    year: '2023 - Present',
+    title: 'Computer Science',
+    institute: 'Widya Mandira Catholic University Kupang',
+    desc: 'studying various aspects of computers and information technology, ranging from programming, algorithms, databases, to networks and information systems to prepare students to become IT professionals.',
   },
   // {
   //   year: '2021 – 2022',
@@ -127,22 +127,16 @@ const education: ExperienceType[] = [
 
 const experience: ExperienceType[] = [
   {
-    year: '2025 Oct – Present',
-    title: 'Software Engineering Intern',
-    institute: 'X4 Digital Labs',
-    desc: 'Building production-grade UIs using React, Next.js, and Tailwind; handling PR reviews, refactoring work, and feature development in a fast-paced startup environment.',
+    year: '2025 Agu - 2025 Oct',
+    title: 'ADMINISTRASI & DOKUMENTASI',
+    institute: "PAUD Vi'a Dolorosa Tulun Tuan",
+    desc: 'Manage and organize accreditation documents, ensure the completeness of administrative files, and collaborate with school administrators in verification.',
   },
   {
-    year: '2023 Sep - 2024 Mar',
-    title: 'Software Engineering Intern',
-    institute: 'London Stock Exchange Group (LSEG)',
-    desc: 'Collaborated on frontend features and real-time dashboards using React.js, enhancing user experience and data visualization.',
-  },
-  {
-    year: '2023 May – Present',
+    year: '2024 Agu – 2024 Nov',
     title: 'Data Annotator - Team Lead',
     institute:
-      ' Data Annotation Project In collaboration with the University of Melbourne and the University of Kelaniya.',
+      ' Data Annotation Project In collaboration with the Widya Mandira Catholic University Kupang.',
     desc: 'Led a team in developing AI-driven solutions for optimizing recycling processes through data annotation and preprocessing.',
   },
   // {
@@ -257,13 +251,15 @@ const services: ServiceType[] = [
 const publications: PublicationType[] = [
   {
     title:
-      'Evaluating AI-Based Unit Testing Tools: A Focus on Usability, Reliability, and Integration',
-    conference:
-      '2025 5th International Conference on Advanced Research in Computing (ICARC)',
-    doi: '10.1109/ICARC64760.2025.10963099',
+      "The Impact of the Internet on Teenagers' Social Behavior (Case Study: Boarding House Environment)",
+    conference: '',
     description:
-      'Empirical comparison of AI-based unit testing tools, focusing on usability, reliability, and integration challenges.',
+      "This study shows that the internet makes teenagers more open in their interactions, but also puts them at risk of addiction and isolation; supervision and digital education are needed to minimize negative impacts and maximize positive benefits.",
+    url: "https://jptam.org/index.php/jptam/article/view/18313",
+    button:
+      '<button onclick="window.open(\'https://jptam.org/index.php/jptam/article/view/18313\', \'_blank\')">Baca Artikel</button>',
   },
+
   {
     title:
       'Agent-Based Modeling of Surplus Food Management: A Social Entrepreneurship Approach to Reducing Waste and Enhancing Sustainability',

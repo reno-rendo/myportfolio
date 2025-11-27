@@ -44,7 +44,7 @@ export const About = () => {
         transition={{ delay: 0.2 }}
       >
         <a
-          href='https://www.linkedin.com/in/hafsa-aarifeen/'
+          href='https://www.linkedin.com/in/reno-rendo-073034304/'
           target='_blank'
           rel='noopener noreferrer'
         >

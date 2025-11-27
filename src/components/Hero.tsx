@@ -29,7 +29,7 @@ export const Hero = () => {
       >
         I'm{' '}
         <u>
-          <span className='text-primary'>Hafsa Aarifeen</span>
+          <span className='text-primary'>Reno Rendo</span>
         </u>
         , A passionate Fullstack & Frontend Developer
       </motion.h1>
