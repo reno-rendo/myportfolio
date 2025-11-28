@@ -2,12 +2,13 @@
 
 A fast, minimal portfolio built with **React + Vite**. Clean code. Clear structure.
 
-### 🔗 Live Site  
+### 🔗 Live Site
+
 https://hafsaaarifeen.netlify.app/
 
 ---
 
-### 🛡 Tech Stack 
+### 🛡 Tech Stack
 
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
@@ -28,12 +29,12 @@ https://hafsaaarifeen.netlify.app/
 
 A personal portfolio showcasing:
 
-- Fullstack & Frontend development work  
-- Real-world projects (Java, React, PostgreSQL, APIs)  
-- Research publications in AI & software engineering  
-- Professional experience and education  
-- Certifications and technical skills  
-- Contact form for collaboration  
+- Fullstack & Frontend development work
+- Real-world projects (Java, React, PostgreSQL, APIs)
+- Research publications in AI & software engineering
+- Professional experience and education
+- Certifications and technical skills
+- Contact form for collaboration
 
 ---
 
@@ -50,15 +51,17 @@ A personal portfolio showcasing:
 ## 📁 Project Structure
 
 📂 src/ <br />
- ├─ components/<br />
- ├─ sections/<br />
- ├─ constants/<br />
- ├─ assets/<br />
- ├─ lib/<br />
- ├─ routes/<br />
- └─ styles/<br />
+├─ components/<br />
+├─ sections/<br />
+├─ constants/<br />
+├─ assets/<br />
+├─ lib/<br />
+├─ routes/<br />
+└─ styles/<br />
 
- ---
+---
+
+ <!-- trigger vercel deploy -->
 
 ## 🔧 Running Locally
 
@@ -76,7 +79,7 @@ A personal portfolio showcasing:
 
 ---
 
-##  📌 Future Enhancements
+## 📌 Future Enhancements
 
 - Blog section with MDX
 - CMS integration (Sanity / Contentlayer)
