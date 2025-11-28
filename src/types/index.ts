@@ -50,6 +50,7 @@ export type PublicationType = {
   title: string;
   conference: string;
   doi?: string;
+  URL?: string;
   description: string;
 };
 

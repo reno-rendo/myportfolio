@@ -252,19 +252,20 @@ const publications: PublicationType[] = [
   {
     title:
       "The Impact of the Internet on Teenagers' Social Behavior (Case Study: Boarding House Environment)",
-    conference: '',
+    conference:
+      '2025 5th International Conference on Advanced Research in Computing (ICARC)',
+    URL: 'https://jptam.org/index.php/jptam/article/view/18313',
     description:
-      "This study shows that the internet makes teenagers more open in their interactions, but also puts them at risk of addiction and isolation; supervision and digital education are needed to minimize negative impacts and maximize positive benefits.",
-    url: "https://jptam.org/index.php/jptam/article/view/18313",
-    button:
-      '<button onclick="window.open(\'https://jptam.org/index.php/jptam/article/view/18313\', \'_blank\')">Baca Artikel</button>',
+      'This study shows that the internet makes teenagers more open in their interactions, but also puts them at risk of addiction and isolation; supervision and digital education are needed to minimize negative impacts and maximize positive benefits.',
   },
+
 
   {
     title:
       'Agent-Based Modeling of Surplus Food Management: A Social Entrepreneurship Approach to Reducing Waste and Enhancing Sustainability',
     conference:
       '2025 International Conference on Multidisciplinary Research (ICMR)',
+    // URL: 'https://jptam.org/index.php/jptam/article/view/18313',
     description:
       'Explores the integration of social entrepreneurship and agent-based modeling to address food waste and food insecurity.',
   },

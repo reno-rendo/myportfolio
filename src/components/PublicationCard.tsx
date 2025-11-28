@@ -6,8 +6,6 @@ export const PublicationCard = ({
 }: {
   publication: PublicationType;
 }) => {
-  const doiUrl = publication.doi ? `https://doi.org/${publication.doi}` : null;
-
   return (
     <div className='flex flex-col justify-between rounded-2xl border border-neutral-700 p-8 hover:bg-zinc-900 transition-all duration-300 hover:border-primary'>
       <div>
@@ -20,10 +18,10 @@ export const PublicationCard = ({
         <p className='text-neutral-400 mb-4'>{publication.description}</p>
       </div>
 
-      {doiUrl && (
+      {publication.URL && (
         <div className='w-full flex justify-center mt-6'>
           <a
-            href={doiUrl}
+            href={publication.URL}
             target='_blank'
             rel='noopener noreferrer'
             className='inline-flex items-center gap-2 px-4 py-2 rounded-md
