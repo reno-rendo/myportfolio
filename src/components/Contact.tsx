@@ -47,7 +47,7 @@ export const Contact = () => {
     setIsSuccess(false);
 
     const formUrl =
-      'https://docs.google.com/forms/d/e/1FAIpQLScNczRo9kn7Nv1n3Nnnunafw5jA0NDv_nOuajJPBTBs8_64lQ/formResponse';
+      'https://forms.gle/TFqvKrEU9RbqAKoAA';
 
     const formData = new FormData();
     formData.append('entry.504361379', values.name);
