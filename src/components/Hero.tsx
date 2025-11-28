@@ -46,7 +46,7 @@ export const Hero = () => {
           asChild
         >
           <a
-            href='https://drive.google.com/file/d/1dN4RbPlDWUWICa-4vhE46YqTeDfzNgEB/view?usp=sharing'
+            href='https://drive.google.com/file/d/1HBQg5HZm-7NPlCJqKXWnF2MZM4dj5XH_/view?usp=sharing'
             target='_blank'
             rel='noopener noreferrer'
           >
