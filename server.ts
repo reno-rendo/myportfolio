@@ -21,7 +21,7 @@ import cookieParser from 'cookie-parser';
 
 const app = express();
 const PORT = 3000;
-const APP_URL = process.env.APP_URL || 'http://localhost:5173';
+const APP_URL = (process.env.APP_URL || 'http://localhost:5173').replace(/\/$/, '');
 
 // Ensure public/uploads exists
 const uploadDir = './public/uploads';
@@ -129,6 +129,7 @@ app.post('/api/upload', requireAuth, upload.single('image'), async (req, res) =>
 app.get('/api/auth/github', (req, res) => {
     const state = generateState();
     const url = github.createAuthorizationURL(state, ['read:user', 'user:email']);
+    console.log(`[AUTH] Initiating GitHub login. Redirect URI: ${url.searchParams.get('redirect_uri')}`);
     res.cookie('github_oauth_state', state, { httpOnly: true, maxAge: 600000 });
     res.redirect(url.toString());
 });
