@@ -4,7 +4,7 @@ A fast, minimal portfolio built with **React + Vite**. Clean code. Clear structu
 
 ### 🔗 Live Site
 
-https://reno-rendo.vercel.app/ (atau link deploy Anda)
+https://reno-portfolio.vercel.app/
 
 ---
 
