@@ -129,7 +129,13 @@ app.post('/api/upload', requireAuth, upload.single('image'), async (req, res) =>
 app.get('/api/auth/github', (req, res) => {
     const state = generateState();
     const url = github.createAuthorizationURL(state, ['read:user', 'user:email']);
-    console.log(`[AUTH] Initiating GitHub login. Redirect URI: ${url.searchParams.get('redirect_uri')}`);
+
+    const redirectUri = url.searchParams.get('redirect_uri');
+    console.log(`[AUTH DEBUG] Initiating GitHub login.`);
+    console.log(`[AUTH DEBUG] Client ID: ${process.env.GITHUB_CLIENT_ID}`);
+    console.log(`[AUTH DEBUG] Redirect URI Sent: ${redirectUri}`);
+    console.log(`[AUTH DEBUG] Full URL: ${url.toString()}`);
+
     res.cookie('github_oauth_state', state, { httpOnly: true, maxAge: 600000 });
     res.redirect(url.toString());
 });
