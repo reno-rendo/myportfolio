@@ -1,7 +1,7 @@
 import { GitHub } from 'arctic';
 
 // GitHub OAuth configuration
-const APP_URL = (process.env.APP_URL || 'http://localhost:5173').replace(/\/$/, '');
+const APP_URL = (process.env.APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:5173')).replace(/\/$/, '');
 
 export const github = new GitHub(
     process.env.GITHUB_CLIENT_ID || '',
