@@ -1,15 +1,21 @@
 import { motion } from 'motion/react';
 import { ExternalLink } from 'lucide-react';
 import { fadeUp } from '@/lib/animations';
-import type { ProjectType } from '@/types';
+interface ProjectCardProps {
+  imgSrc: string;
+  projectLink: string;
+  tags: string[];
+  title: string;
+  toolIcons?: Record<string, string>;
+}
 
 export const ProjectCard = ({
   imgSrc,
   projectLink,
-  // desc,
   tags,
   title,
-}: ProjectType) => {
+  toolIcons,
+}: ProjectCardProps) => {
   return (
     <motion.div
       variants={fadeUp}
@@ -33,15 +39,26 @@ export const ProjectCard = ({
           {desc}
         </p> */}
 
-        <div className='flex flex-wrap gap-2 mt-4'>
-          {tags.map((tag, i) => (
-            <span
-              key={i}
-              className='px-3 py-1 text-sm rounded-md bg-primary text-primary-foreground'
-            >
-              {tag}
-            </span>
-          ))}
+        <div className='flex flex-wrap items-center justify-center gap-2 mt-4'>
+          {tags.map((tag, i) => {
+            // Normalized lookup: remove internal whitespace, lowercase
+            const lookup = tag.toLowerCase().trim();
+            // Find matching icon key (keys in toolIcons should be normalized or we check flexibly)
+            const iconUrl = toolIcons ? Object.entries(toolIcons).find(([k]) => k.toLowerCase() === lookup)?.[1] : null;
+
+            return iconUrl ? (
+              <div key={i} className="bg-white/10 p-1.5 rounded-lg backdrop-blur-sm" title={tag}>
+                <img src={iconUrl} alt={tag} className="w-5 h-5 sm:w-6 sm:h-6 object-contain" />
+              </div>
+            ) : (
+              <span
+                key={i}
+                className='px-3 py-1 text-sm rounded-md bg-primary text-primary-foreground'
+              >
+                {tag}
+              </span>
+            );
+          })}
         </div>
 
         <a

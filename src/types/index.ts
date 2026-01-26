@@ -1,36 +1,34 @@
-import type { JSX } from 'react';
+import { type JSX } from 'react';
+import type { Project, Experience, Service, Tool, Stat, Publication, Certification } from '@/lib/db';
 
-export type ProjectType = {
-  imgSrc: string;
-  title: string;
-  tags: string[];
-  projectLink: string;
-  desc?: string;
+export type { Project, Experience, Service, Tool, Stat, Publication, Certification };
+
+export type ProjectType = Project & {
+  imgSrc?: string; // mapping from imageUrl
+  tags?: string[]; // mapping from techStack
+  projectLink?: string; // mapping from liveUrl/repoUrl
+  desc?: string; // mapping from description
+  toolIcons?: Record<string, string>;
 };
 
 export type ExperienceType = {
-  year: string;
-  title: string;
-  institute: string;
-  desc: string;
+  year: string; // from year
+  title: string; // from title
+  institute: string; // from institute
+  desc: string; // from description
 };
 
-export type ServiceType = {
-  title: string;
-  desc: string;
-  projects: string;
-  icon: JSX.Element;
+export type ServiceType = Service & {
+  desc?: string; // mapping from description
+  projects?: string; // mapping from projectCount
+  icon?: JSX.Element; // For UI rendering
 };
 
-export type ToolsType = {
-  imgSrc: string;
-  label: string;
+export type ToolsType = Tool & {
+  imgSrc?: string; // mapping from imageUrl
 };
 
-export type StatsType = {
-  number: string;
-  label: string;
-};
+export type StatsType = Stat;
 
 export type TestimonialsType = {
   name: string;
@@ -46,17 +44,11 @@ export type LinksType = {
   icon: React.ElementType;
 };
 
-export type PublicationType = {
-  title: string;
-  conference: string;
-  doi?: string;
-  URL?: string;
-  description: string;
+export type PublicationType = Publication & {
+  URL?: string; // from url
 };
 
-export type CertificationType = {
-  title: string;
-  awarded: string;
-  credentials: string;
-  imgSrc: string;
+export type CertificationType = Certification & {
+  awarded?: string; // from awardedBy
+  imgSrc?: string; // from imageUrl
 };

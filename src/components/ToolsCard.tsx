@@ -2,9 +2,12 @@ import { motion } from 'motion/react';
 
 import { fadeUp } from '@/lib/animations';
 
-import type { ToolsType } from '@/types';
+interface ToolItem {
+  label: string;
+  imgSrc: string;
+}
 
-export const ToolsCard = ({ tool }: { tool: ToolsType }) => {
+export const ToolsCard = ({ tool }: { tool: ToolItem }) => {
   return (
     <motion.div
       variants={fadeUp}

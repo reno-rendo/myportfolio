@@ -1,17 +1,41 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-
 import { fadeUp, staggerContainer } from '@/lib/animations';
-
 import { SectionHeader } from './SectionHeader';
-
 import { Button } from './ui/button';
 
+import { DEFAULTS } from '@/lib/defaults';
+
 export const About = () => {
+  const [aboutText, setAboutText] = useState<string>('');
+  const [linkedinUrl, setLinkedinUrl] = useState<string>('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProfile() {
+      try {
+        const res = await fetch('/api/profile');
+        if (res.ok) {
+          const profile = await res.json();
+          setAboutText(profile?.about || '');
+          setLinkedinUrl(profile?.linkedin || '');
+        }
+      } catch (error) {
+        console.error('Failed to fetch about:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProfile();
+  }, []);
+
+  const defaultText = DEFAULTS.profile.about;
+
   return (
     <motion.section
       initial='hidden'
       whileInView='visible'
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={staggerContainer(0)}
       className='mt-20 scroll-mt-10'
       id='about'
@@ -21,30 +45,26 @@ export const About = () => {
         title='Tranforming Ideas into Reality Through Code'
       />
 
-      <motion.p
+      <motion.div
         variants={fadeUp}
-        className='mt-4 text-xl text-neutral-100'
+        className='mt-4 text-xl text-neutral-100 whitespace-pre-line'
       >
-        I’m a full-stack developer who builds simple, stable and easy-to-use
-        features. I’m not great at everything, but I learn fast and I care about
-        doing things properly.
-        <br /> <br />
-        Real projects taught me something important: good software comes from
-        clear thinking and fixing one problem at a time. No shortcuts.
-        <br />
-        <br />
-        What drives me is simple. When someone uses something I built and it
-        “just works,” that’s enough. That’s what keeps me improving and aiming
-        to build software that lasts.
-        <br /> <br />
-        I’m here to build software that lasts, not quick prototypes.
-      </motion.p>
+        {loading ? (
+          <div className="space-y-4 animate-pulse">
+            <div className="h-4 bg-zinc-800 rounded w-full" />
+            <div className="h-4 bg-zinc-800 rounded w-5/6" />
+            <div className="h-4 bg-zinc-800 rounded w-4/6" />
+          </div>
+        ) : (
+          aboutText ? aboutText : defaultText
+        )}
+      </motion.div>
       <motion.div
         variants={fadeUp}
         transition={{ delay: 0.2 }}
       >
         <a
-          href='https://www.linkedin.com/in/reno-rendo-073034304/'
+          href={linkedinUrl || 'https://www.linkedin.com/'}
           target='_blank'
           rel='noopener noreferrer'
         >

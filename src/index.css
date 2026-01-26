@@ -125,3 +125,21 @@
     @apply bg-background text-foreground font-syne;
   }
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-zinc-700/50 hover:bg-zinc-600 rounded-full transition-colors;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px; /* Thinner for the profile card */
+}

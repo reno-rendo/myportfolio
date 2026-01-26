@@ -74,7 +74,7 @@ export const Contact = () => {
     <motion.section
       initial='hidden'
       whileInView='visible'
-      viewport={{ once: true, amount: 0.8 }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={fadeUp}
       className='mt-30 scroll-mt-10'
       id='contact'

@@ -1,20 +1,57 @@
+import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-
 import { fadeUp, staggerContainer } from '@/lib/animations';
-
 import { Button } from './ui/button';
+import { SparkleIcon, Download } from 'lucide-react';
 
-import { SparkleIcon } from 'lucide-react';
+interface HeroData {
+  name: string;
+  bio: string;
+  resumeUrl: string;
+}
+
+import { DEFAULTS } from '@/lib/defaults';
 
 export const Hero = () => {
+  const [data, setData] = useState<HeroData>({
+    name: DEFAULTS.profile.name,
+    bio: DEFAULTS.profile.bio,
+    resumeUrl: DEFAULTS.profile.resumeUrl,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProfile() {
+      try {
+        const res = await fetch('/api/profile');
+        if (res.ok) {
+          const profile = await res.json();
+          if (profile) {
+            setData({
+              name: profile.name || DEFAULTS.profile.name,
+              bio: profile.bio || DEFAULTS.profile.bio,
+              resumeUrl: profile.resumeUrl || DEFAULTS.profile.resumeUrl,
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch profile:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProfile();
+  }, []);
+
   return (
     <motion.section
       initial='hidden'
       whileInView='visible'
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={staggerContainer(0)}
       className='pt-20'
       id='hero'
+      key={loading ? 'loading' : 'loaded'}
     >
       <motion.p
         variants={fadeUp}
@@ -23,16 +60,24 @@ export const Hero = () => {
         <SparkleIcon size={15} />
         <span>Introduction</span>
       </motion.p>
-      <motion.h1
-        variants={fadeUp}
-        className='text-4xl md:text-5xl lg:text-6xl font-semibold capitalize mt-2 max-w-3xl md:leading-16'
-      >
-        I'm{' '}
-        <u>
-          <span className='text-primary'>Reno Rendo</span>
-        </u>
-        , A passionate Fullstack & Frontend Developer
-      </motion.h1>
+
+      {loading ? (
+        <motion.div variants={fadeUp} className="mt-2 text-4xl md:text-5xl lg:text-6xl font-semibold capitalize max-w-3xl md:leading-16 space-y-4">
+          <div className="h-16 bg-zinc-800 rounded w-1/2 animate-pulse" />
+          <div className="h-12 bg-zinc-800 rounded w-3/4 animate-pulse" />
+        </motion.div>
+      ) : (
+        <motion.h1
+          variants={fadeUp}
+          className='text-4xl md:text-5xl lg:text-6xl font-semibold capitalize mt-2 max-w-3xl md:leading-16'
+        >
+          I'm{' '}
+          <u>
+            <span className='text-primary'>{data.name}</span>
+          </u>
+          , {data.bio}
+        </motion.h1>
+      )}
 
       <motion.div
         variants={fadeUp}
@@ -46,11 +91,11 @@ export const Hero = () => {
           asChild
         >
           <a
-            href='https://drive.google.com/file/d/1yPVP9owGiyYQQlwRoE8ktR00_pL5Gl6z/view?usp=sharing'
+            href={data.resumeUrl}
             target='_blank'
             rel='noopener noreferrer'
           >
-            Download Resume
+            <Download className="mr-2 h-4 w-4" /> Download Resume
           </a>
         </Button>
       </motion.div>

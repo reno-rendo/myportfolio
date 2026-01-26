@@ -1,10 +1,14 @@
-import type { PublicationType } from '@/types';
 import { ExternalLink } from 'lucide-react';
 
 export const PublicationCard = ({
   publication,
 }: {
-  publication: PublicationType;
+  publication: {
+    title: string;
+    conference: string;
+    description?: string | null;
+    URL?: string;
+  };
 }) => {
   return (
     <div className='flex flex-col justify-between rounded-2xl border border-neutral-700 p-8 hover:bg-zinc-900 transition-all duration-300 hover:border-primary'>

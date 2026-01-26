@@ -1,10 +1,10 @@
-# 🌐 Hafsa Aarifeen – Portfolio Website
+# 🌐 Reno Rendo – Portfolio Website
 
 A fast, minimal portfolio built with **React + Vite**. Clean code. Clear structure.
 
 ### 🔗 Live Site
 
-https://hafsaaarifeen.netlify.app/
+https://reno-rendo.vercel.app/ (atau link deploy Anda)
 
 ---
 
@@ -20,6 +20,29 @@ https://hafsaaarifeen.netlify.app/
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
 <br/>
 ![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
+
+#### 📊 Language Distribution
+
+| Language | Files | Percentage |
+|----------|-------|-----------|
+| **TSX** (React) | 27 | 90% |
+| **TypeScript** | 3 | 7% |
+| **CSS** | 2 | 3% |
+
+---
+
+#### 🎯 Key Technologies
+
+- **Frontend Framework**: React 19.2.0
+- **Build Tool**: Vite 7.2.2
+- **Language**: TypeScript 5.9.3
+- **Styling**: Tailwind CSS 4.1.17 + ShadCN UI
+- **Animation**: Framer Motion 12.23.24 + Lenis (smooth scroll)
+- **Forms**: React Hook Form 7.66.0 + Zod validation
+- **Icons**: Lucide React 0.553.0
+- **UI Components**: Radix UI primitives
+- **Code Quality**: ESLint 9.39.1 + Prettier 3.6.2
+- **Deployment**: Netlify
 
 </div>
 
@@ -65,7 +88,7 @@ A personal portfolio showcasing:
 
 ## 🔧 Running Locally
 
-    git clone https://github.com/hafsa-aarifeen/portfolio.git
+    git clone https://github.com/reno-rendo/myportf.git
     cd portfolio
     npm install
     npm run dev
@@ -85,3 +108,10 @@ A personal portfolio showcasing:
 - CMS integration (Sanity / Contentlayer)
 - More backend project breakdowns
 - Light mode toggle
+
+---
+
+## 📄 License
+
+This project is **All Rights Reserved**. Personal use only. No part of this project may be reproduced or distributed without permission.
+
