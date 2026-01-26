@@ -1,10 +1,12 @@
 import { GitHub } from 'arctic';
 
 // GitHub OAuth configuration
+const APP_URL = process.env.APP_URL || 'http://localhost:5173';
+
 export const github = new GitHub(
     process.env.GITHUB_CLIENT_ID || '',
     process.env.GITHUB_CLIENT_SECRET || '',
-    process.env.GITHUB_REDIRECT_URI || 'http://localhost:5173/api/auth/github/callback'
+    process.env.GITHUB_REDIRECT_URI || `${APP_URL}/api/auth/github/callback`
 );
 
 // Session cookie config

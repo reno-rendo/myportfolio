@@ -21,6 +21,7 @@ import cookieParser from 'cookie-parser';
 
 const app = express();
 const PORT = 3000;
+const APP_URL = process.env.APP_URL || 'http://localhost:5173';
 
 // Ensure public/uploads exists
 const uploadDir = './public/uploads';
@@ -138,7 +139,7 @@ app.get('/api/auth/github/callback', async (req, res) => {
     const storedState = req.cookies?.github_oauth_state;
 
     if (!code || !state || state !== storedState) {
-        return res.redirect('http://localhost:5173/admin/login?error=invalid_state');
+        return res.redirect(`${APP_URL}/admin/login?error=invalid_state`);
     }
 
     try {
@@ -149,7 +150,7 @@ app.get('/api/auth/github/callback', async (req, res) => {
         const githubUser: any = await userRes.json();
 
         if (!isAllowedAdmin(githubUser.id.toString(), githubUser.login)) {
-            return res.redirect('http://localhost:5173/admin/login?error=not_authorized');
+            return res.redirect(`${APP_URL}/admin/login?error=not_authorized`);
         }
 
         const db = getDb();
@@ -170,10 +171,10 @@ app.get('/api/auth/github/callback', async (req, res) => {
 
         res.clearCookie('github_oauth_state');
         res.cookie(SESSION_COOKIE_NAME, sessionId, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
-        res.redirect('http://localhost:5173/admin');
+        res.redirect(`${APP_URL}/admin`);
     } catch (e) {
         console.error('OAuth error:', e);
-        res.redirect('http://localhost:5173/admin/login?error=callback_failed');
+        res.redirect(`${APP_URL}/admin/login?error=callback_failed`);
     }
 });
 
