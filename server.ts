@@ -124,6 +124,29 @@ app.post('/api/upload', requireAuth, upload.single('image'), async (req, res) =>
 
 // ==================== AUTH ROUTES ====================
 
+// GET /api/health - Debug Vercel Connection
+app.get('/api/health', async (req, res) => {
+    try {
+        const db = getDb();
+        // Check DB connection by selecting 1
+        await db.select().from(stats).limit(1);
+
+        res.json({
+            status: 'ok',
+            database: 'connected',
+            provider: process.env.TURSO_DATABASE_URL ? 'Turso' : 'Local',
+            timestamp: new Date().toISOString()
+        });
+    } catch (e: any) {
+        console.error('Health Check Failed:', e);
+        res.status(500).json({
+            status: 'error',
+            message: e.message,
+            stack: process.env.NODE_ENV === 'development' ? e.stack : undefined
+        });
+    }
+});
+
 // POST /api/auth/login - Manual login with username/password
 app.post('/api/auth/login', async (req, res) => {
     const { username, password } = req.body;
