@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { motion } from 'motion/react';
 
@@ -9,6 +9,10 @@ import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
 import { SectionHeader } from './SectionHeader';
+import { AlertCircle } from 'lucide-react';
+
+// Cloudflare Turnstile Site Key - ganti dengan key Anda
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '0x4AAAAAAAA-placeholder';
 
 type ContactFormValues = {
   name: string;
@@ -18,9 +22,30 @@ type ContactFormValues = {
   message: string;
 };
 
+// Declare Turnstile global type
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (element: HTMLElement | string, options: {
+        sitekey: string;
+        callback?: (token: string) => void;
+        'error-callback'?: () => void;
+        'expired-callback'?: () => void;
+        theme?: 'light' | 'dark' | 'auto';
+      }) => string;
+      reset: (widgetId?: string) => void;
+      remove: (widgetId?: string) => void;
+    };
+  }
+}
+
 export const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileError, setTurnstileError] = useState<string | null>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
 
   const form = useForm<ContactFormValues>({
     defaultValues: {
@@ -31,6 +56,52 @@ export const Contact = () => {
       message: '',
     },
   });
+
+  // Initialize Turnstile widget
+  useEffect(() => {
+    const initTurnstile = () => {
+      if (turnstileRef.current && window.turnstile && !widgetIdRef.current) {
+        widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+          sitekey: TURNSTILE_SITE_KEY,
+          callback: (token: string) => {
+            setTurnstileToken(token);
+            setTurnstileError(null);
+          },
+          'error-callback': () => {
+            setTurnstileError('Verifikasi gagal. Coba lagi.');
+            setTurnstileToken(null);
+          },
+          'expired-callback': () => {
+            setTurnstileToken(null);
+            setTurnstileError('Verifikasi expired. Klik untuk verifikasi ulang.');
+          },
+          theme: 'dark',
+        });
+      }
+    };
+
+    // Check if turnstile is already loaded
+    if (window.turnstile) {
+      initTurnstile();
+    } else {
+      // Wait for script to load
+      const checkTurnstile = setInterval(() => {
+        if (window.turnstile) {
+          clearInterval(checkTurnstile);
+          initTurnstile();
+        }
+      }, 100);
+
+      return () => clearInterval(checkTurnstile);
+    }
+
+    return () => {
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
+      }
+    };
+  }, []);
 
   // Auto-hide success message after 5 seconds
   useEffect(() => {
@@ -43,6 +114,12 @@ export const Contact = () => {
   }, [isSuccess]);
 
   const onSubmit = async (values: ContactFormValues) => {
+    // Check Turnstile token
+    if (!turnstileToken) {
+      setTurnstileError('Harap selesaikan verifikasi terlebih dahulu');
+      return;
+    }
+
     setIsSubmitting(true);
     setIsSuccess(false);
 
@@ -65,6 +142,12 @@ export const Contact = () => {
 
       form.reset();
       setIsSuccess(true);
+
+      // Reset Turnstile after successful submission
+      if (window.turnstile && widgetIdRef.current) {
+        window.turnstile.reset(widgetIdRef.current);
+        setTurnstileToken(null);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -183,11 +266,26 @@ export const Contact = () => {
             )}
           />
 
+          {/* Cloudflare Turnstile Widget */}
+          <div className='space-y-2'>
+            <div
+              ref={turnstileRef}
+              className='cf-turnstile'
+              data-theme='dark'
+            />
+            {turnstileError && (
+              <div className='flex items-center gap-2 text-red-400 text-sm'>
+                <AlertCircle size={16} />
+                <span>{turnstileError}</span>
+              </div>
+            )}
+          </div>
+
           {/* Submit Button */}
           <Button
             type='submit'
             size='lg'
-            disabled={isSubmitting}
+            disabled={isSubmitting || !turnstileToken}
             className='w-1/3 flex items-center justify-center gap-2'
           >
             {isSubmitting ? (
