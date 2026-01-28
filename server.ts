@@ -22,21 +22,26 @@ const app = express();
 const PORT = 3000;
 const APP_URL = (process.env.APP_URL || 'http://localhost:5173').replace(/\/$/, '');
 
-// Ensure public/uploads exists
-const uploadDir = './public/uploads';
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
+// Environment check
+const isVercel = process.env.VERCEL === '1';
 
-// File upload configuration
-// File upload configuration - STAGING AREA
-const stagingDir = './public/staging';
-if (!fs.existsSync(stagingDir)) {
-    fs.mkdirSync(stagingDir, { recursive: true });
-}
+// Configure directories based on environment
+const UPLOAD_ROOT = isVercel ? '/tmp' : './public';
+const uploadDir = path.join(UPLOAD_ROOT, 'uploads');
+const stagingDir = path.join(UPLOAD_ROOT, 'staging');
 
+// Helper to ensure directories exist (lazy init)
+const ensureDirs = () => {
+    if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+    if (!fs.existsSync(stagingDir)) fs.mkdirSync(stagingDir, { recursive: true });
+};
+
+// Multer Storage Configuration
 const storage = multer.diskStorage({
-    destination: stagingDir,
+    destination: (req, file, cb) => {
+        ensureDirs(); // Ensure existence before save
+        cb(null, stagingDir);
+    },
     filename: (req, file, cb) => {
         const uniqueName = `staging-${Date.now()}-${Math.round(Math.random() * 1E9)}${path.extname(file.originalname)}`;
         cb(null, uniqueName);
