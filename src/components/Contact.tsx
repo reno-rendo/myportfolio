@@ -11,8 +11,8 @@ import { Button } from './ui/button';
 import { SectionHeader } from './SectionHeader';
 import { AlertCircle } from 'lucide-react';
 
-// Cloudflare Turnstile Site Key - ganti dengan key Anda
-const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '0x4AAAAAAAA-placeholder';
+// Cloudflare Turnstile Site Key - fallback ke Test Key if missing
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'; // Test Key Cloudflare: Always Pass
 
 type ContactFormValues = {
   name: string;
@@ -60,28 +60,34 @@ export const Contact = () => {
   // Initialize Turnstile widget
   useEffect(() => {
     let scriptLoaded = false;
-    
+
     const initTurnstile = () => {
+      console.log('[Turnstile] Init called. Ref:', !!turnstileRef.current, 'Window:', !!window.turnstile, 'WidgetID:', widgetIdRef.current);
       if (turnstileRef.current && window.turnstile && !widgetIdRef.current) {
         try {
+          console.log('[Turnstile] Rendering widget...');
           widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
             sitekey: TURNSTILE_SITE_KEY,
             callback: (token: string) => {
+              console.log('[Turnstile] Success token received');
               setTurnstileToken(token);
               setTurnstileError(null);
             },
             'error-callback': () => {
+              console.error('[Turnstile] Verification failed');
               setTurnstileError('Verifikasi gagal. Coba lagi.');
               setTurnstileToken(null);
             },
             'expired-callback': () => {
+              console.warn('[Turnstile] Token expired');
               setTurnstileToken(null);
               setTurnstileError('Verifikasi expired. Klik untuk verifikasi ulang.');
             },
             theme: 'dark',
           });
+          console.log('[Turnstile] Render called, Widget ID:', widgetIdRef.current);
         } catch (e) {
-          console.error('Turnstile render error:', e);
+          console.error('[Turnstile] Render error:', e);
         }
       }
     };
@@ -297,8 +303,9 @@ export const Contact = () => {
           <div className='space-y-2'>
             <div
               ref={turnstileRef}
-              className='cf-turnstile'
+              className='cf-turnstile min-h-[65px]'
               data-theme='dark'
+              style={{ minHeight: '65px' }}
             />
             {turnstileError && (
               <div className='flex items-center gap-2 text-red-400 text-sm'>
