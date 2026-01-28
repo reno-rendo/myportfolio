@@ -166,6 +166,46 @@ app.get('/api/auth/me', async (req, res) => {
     res.json({ user: user ? { id: user.id, username: user.username, email: user.email, avatarUrl: user.avatarUrl } : null });
 });
 
+// PUT /api/auth/password - Change password
+app.put('/api/auth/password', requireAuth, async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const user = (req as any).user;
+
+    if (!currentPassword || !newPassword) {
+        return res.status(400).json({ error: 'Password lama dan baru wajib diisi' });
+    }
+
+    if (newPassword.length < 6) {
+        return res.status(400).json({ error: 'Password baru minimal 6 karakter' });
+    }
+
+    try {
+        const db = getDb();
+
+        // Get current user with password hash
+        const currentUser = await db.select().from(adminUsers).where(eq(adminUsers.id, user.id)).limit(1).then(r => r[0]);
+
+        if (!currentUser) {
+            return res.status(404).json({ error: 'User tidak ditemukan' });
+        }
+
+        // Verify current password
+        const isValid = await verifyPassword(currentPassword, currentUser.passwordHash);
+        if (!isValid) {
+            return res.status(401).json({ error: 'Password lama salah' });
+        }
+
+        // Hash new password and update
+        const newHash = await hashPassword(newPassword);
+        await db.update(adminUsers).set({ passwordHash: newHash }).where(eq(adminUsers.id, user.id));
+
+        res.json({ success: true, message: 'Password berhasil diubah' });
+    } catch (e) {
+        console.error('Password change error:', e);
+        res.status(500).json({ error: 'Gagal mengubah password' });
+    }
+});
+
 // DELETE /api/auth/me - Logout
 app.delete('/api/auth/me', async (req, res) => {
     const sessionId = req.cookies?.[SESSION_COOKIE_NAME];

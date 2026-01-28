@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { ImageUpload } from '@/components/admin/ImageUpload';
-import { Save, Loader2, CheckCircle } from 'lucide-react';
+import { Save, Loader2, CheckCircle, Lock, AlertCircle } from 'lucide-react';
 import type { Tool } from '@/lib/db';
 
 interface ProfileData {
@@ -28,6 +28,14 @@ export function SettingsPage() {
     const [saving, setSaving] = useState(false);
     const [saved, setSaved] = useState(false);
     const [tools, setTools] = useState<Tool[]>([]);
+
+    // Password change state
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordSaving, setPasswordSaving] = useState(false);
+    const [passwordError, setPasswordError] = useState<string | null>(null);
+    const [passwordSuccess, setPasswordSuccess] = useState(false);
 
     const [formData, setFormData] = useState<ProfileData>({
         name: '',
@@ -117,6 +125,50 @@ export function SettingsPage() {
         }
     };
 
+    const handlePasswordChange = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setPasswordError(null);
+        setPasswordSuccess(false);
+
+        if (newPassword !== confirmPassword) {
+            setPasswordError('Konfirmasi password tidak cocok');
+            return;
+        }
+
+        if (newPassword.length < 6) {
+            setPasswordError('Password minimal 6 karakter');
+            return;
+        }
+
+        setPasswordSaving(true);
+
+        try {
+            const res = await fetch('/api/auth/password', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ currentPassword, newPassword }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                setPasswordError(data.error || 'Gagal mengubah password');
+                return;
+            }
+
+            setPasswordSuccess(true);
+            setCurrentPassword('');
+            setNewPassword('');
+            setConfirmPassword('');
+            setTimeout(() => setPasswordSuccess(false), 5000);
+        } catch (error) {
+            console.error('Password change error:', error);
+            setPasswordError('Terjadi kesalahan. Coba lagi.');
+        } finally {
+            setPasswordSaving(false);
+        }
+    };
+
     if (loading) {
         return <div className="text-zinc-400">Loading...</div>;
     }
@@ -132,15 +184,78 @@ export function SettingsPage() {
             <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
                 <h2 className="text-lg font-semibold text-white mb-4">Account</h2>
                 <div className="flex items-center gap-4">
-                    {user?.avatarUrl && (
-                        <img src={user.avatarUrl} alt="" className="w-16 h-16 rounded-full" />
-                    )}
+                    <div className="w-16 h-16 rounded-full bg-zinc-800 flex items-center justify-center">
+                        <span className="text-2xl font-bold text-green-500">{user?.username?.charAt(0).toUpperCase()}</span>
+                    </div>
                     <div>
                         <p className="font-medium text-white">{user?.username}</p>
                         <p className="text-sm text-zinc-400">{user?.email || 'No email'}</p>
-                        <p className="text-xs text-zinc-500 mt-1">Logged in via GitHub</p>
+                        <p className="text-xs text-zinc-500 mt-1">Login Manual</p>
                     </div>
                 </div>
+            </div>
+
+            {/* Password Change */}
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+                <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <Lock size={20} className="text-green-500" />
+                    Ubah Password
+                </h2>
+
+                {passwordError && (
+                    <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg flex items-center gap-2">
+                        <AlertCircle className="text-red-500 shrink-0" size={18} />
+                        <p className="text-red-400 text-sm">{passwordError}</p>
+                    </div>
+                )}
+
+                {passwordSuccess && (
+                    <div className="mb-4 p-3 bg-green-500/10 border border-green-500/20 rounded-lg flex items-center gap-2">
+                        <CheckCircle className="text-green-500 shrink-0" size={18} />
+                        <p className="text-green-400 text-sm">Password berhasil diubah!</p>
+                    </div>
+                )}
+
+                <form onSubmit={handlePasswordChange} className="space-y-4 max-w-md">
+                    <div>
+                        <Label>Password Lama</Label>
+                        <Input
+                            type="password"
+                            value={currentPassword}
+                            onChange={e => setCurrentPassword(e.target.value)}
+                            placeholder="Masukkan password lama"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <Label>Password Baru</Label>
+                        <Input
+                            type="password"
+                            value={newPassword}
+                            onChange={e => setNewPassword(e.target.value)}
+                            placeholder="Minimal 6 karakter"
+                            required
+                            minLength={6}
+                        />
+                    </div>
+                    <div>
+                        <Label>Konfirmasi Password Baru</Label>
+                        <Input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={e => setConfirmPassword(e.target.value)}
+                            placeholder="Ulangi password baru"
+                            required
+                        />
+                    </div>
+                    <Button type="submit" disabled={passwordSaving} className="bg-zinc-700 hover:bg-zinc-600">
+                        {passwordSaving ? (
+                            <><Loader2 className="animate-spin mr-2" size={18} /> Menyimpan...</>
+                        ) : (
+                            <><Lock className="mr-2" size={18} /> Ubah Password</>
+                        )}
+                    </Button>
+                </form>
             </div>
 
             {/* Profile Form */}
@@ -252,7 +367,7 @@ export function SettingsPage() {
                     </div>
                     <div className="flex justify-between">
                         <span className="text-zinc-400">Authentication</span>
-                        <span className="text-green-500">GitHub OAuth</span>
+                        <span className="text-green-500">Manual Login</span>
                     </div>
                     <div className="flex justify-between">
                         <span className="text-zinc-400">Server</span>
