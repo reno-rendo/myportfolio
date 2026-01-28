@@ -562,15 +562,25 @@ app.delete('/api/stats', requireAuth, async (req, res) => {
     }
 });
 
-// Start server
-app.listen(PORT, async () => {
-    console.log(`\n🚀 API Server running at http://localhost:${PORT}`);
-    console.log(`   Frontend: http://localhost:5173`);
-    console.log(`   Admin:    http://localhost:5173/admin\n`);
-
-    // Auto-seed Profile if missing
+// Function to seed default data
+const seedDefaults = async () => {
     try {
         const db = getDb();
+
+        // Seed Admin
+        const adminCount = await db.select({ count: adminUsers.id }).from(adminUsers);
+        if (adminCount.length === 0) {
+            console.log('🌱 Seeding default admin...');
+            const hash = await hashPassword('admin123');
+            await db.insert(adminUsers).values({
+                username: 'admin',
+                passwordHash: hash,
+                role: 'admin'
+            });
+            console.log('✅ Admin seeded!');
+        }
+
+        // Seed Profile
         const existing = await db.select().from(profile).where(eq(profile.id, 'main')).limit(1);
         if (existing.length === 0) {
             console.log('🌱 Seeding default profile...');
@@ -578,11 +588,12 @@ app.listen(PORT, async () => {
             console.log('✅ Profile seeded!');
         }
     } catch (e) {
-        console.error('Failed to auto-seed profile:', e);
+        console.error('Failed to auto-seed:', e);
     }
+};
 
-    // ==================== SCHEDULED TASKS ====================
-
+// Scheduled tasks wrapper
+const startScheduledTasks = () => {
     // Run Garbage Collector every 24 hours
     setInterval(async () => {
         try {
@@ -594,4 +605,25 @@ app.listen(PORT, async () => {
 
     // Initial check on startup (with short grace period for safety)
     setTimeout(() => FileService.collectGarbage(1), 5000);
-});
+};
+
+// Start server if not in Vercel/Serverless environment
+// Vercel usually sets process.env.VERCEL or we can check if file is being run directly
+const isVercel = process.env.VERCEL === '1';
+
+if (!isVercel) {
+    app.listen(PORT, async () => {
+        console.log(`\n🚀 API Server running at http://localhost:${PORT}`);
+        console.log(`   Frontend: http://localhost:5173`);
+        console.log(`   Admin:    http://localhost:5173/admin\n`);
+
+        await seedDefaults();
+        startScheduledTasks();
+    });
+} else {
+    // Vercel Environment - Fire and forget seeding
+    // We cannot block the export, but we can try to seed asynchronously
+    seedDefaults().catch(err => console.error('Vercel Seed Error:', err));
+}
+
+export default app;
