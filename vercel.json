@@ -2,6 +2,14 @@
     "version": 2,
     "rewrites": [
         {
+            "source": "/api/test",
+            "destination": "/api/test"
+        },
+        {
+            "source": "/api/health",
+            "destination": "/api/index"
+        },
+        {
             "source": "/api/(.*)",
             "destination": "/api/index"
         },
