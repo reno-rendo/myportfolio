@@ -1,5 +1,3 @@
-import { drizzle } from 'drizzle-orm/better-sqlite3';
-import Database from 'better-sqlite3';
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -162,16 +160,40 @@ export type FileRegistry = typeof fileRegistry.$inferSelect;
 // ======================
 // DATABASE CONNECTION (Local SQLite)
 // ======================
+// ======================
+// DATABASE CONNECTION (Hybrid: Turso / Local)
+// ======================
+import { drizzle } from 'drizzle-orm/libsql';
+import { createClient } from '@libsql/client';
+
 let db: ReturnType<typeof drizzle> | null = null;
 
 export function getDb() {
   if (db) return db;
 
+  // 1. Check for Turso (Production / Opt-in)
+  const url = process.env.TURSO_DATABASE_URL;
+  const authToken = process.env.TURSO_AUTH_TOKEN;
+
+  if (url && (url.startsWith('libsql://') || url.startsWith('https://'))) {
+    console.log('🔌 Connecting to Turso Remote DB...');
+    const client = createClient({ url, authToken });
+    db = drizzle(client, { schema });
+    return db;
+  }
+
+  // 2. Fallback to Local SQLite (Development)
+  console.log('📂 Connecting to Local SQLite (Development Mode)...');
+
   // Database file path - stored in project root
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const dbPath = join(__dirname, '..', '..', 'sqlite.db');
 
-  const sqlite = new Database(dbPath);
-  db = drizzle(sqlite, { schema });
+  // Use file: protocol for LibSQL local mode
+  const client = createClient({
+    url: `file:${dbPath}`
+  });
+
+  db = drizzle(client, { schema });
   return db;
 }
