@@ -1,23 +1,18 @@
-import { GitHub } from 'arctic';
-
-// GitHub OAuth configuration
-const APP_URL = (process.env.APP_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:5173')).replace(/\/$/, '');
-
-export const github = new GitHub(
-    process.env.GITHUB_CLIENT_ID || '',
-    process.env.GITHUB_CLIENT_SECRET || '',
-    process.env.GITHUB_REDIRECT_URI || `${APP_URL}/api/auth/github/callback`
-);
+import bcrypt from 'bcryptjs';
 
 // Session cookie config
 export const SESSION_COOKIE_NAME = 'portfolio_session';
 export const SESSION_DURATION_MS = 1000 * 60 * 60 * 24 * 7; // 7 days
 
-// Check if user is in allowed admin list
-export function isAllowedAdmin(_githubId: string, username: string): boolean {
-    // Configurable via env variable - comma separated GitHub usernames
-    const allowedAdmins = (process.env.ALLOWED_ADMIN_USERNAMES || 'reno-rendo').split(',');
-    return allowedAdmins.includes(username.toLowerCase());
+// Password hashing
+const SALT_ROUNDS = 10;
+
+export async function hashPassword(password: string): Promise<string> {
+    return bcrypt.hash(password, SALT_ROUNDS);
+}
+
+export async function verifyPassword(password: string, hash: string): Promise<boolean> {
+    return bcrypt.compare(password, hash);
 }
 
 // Generate session ID

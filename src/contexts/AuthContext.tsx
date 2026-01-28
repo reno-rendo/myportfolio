@@ -10,7 +10,7 @@ interface User {
 interface AuthContextType {
     user: User | null;
     loading: boolean;
-    login: () => void;
+    login: (username: string, password: string) => Promise<{ success: boolean; error?: string }>;
     logout: () => Promise<void>;
     checkAuth: () => Promise<void>;
 }
@@ -34,10 +34,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
     };
 
-    const login = () => {
-        // Redirect to GitHub OAuth on Express server
-        // Direct to port 3000 because window.location.href bypasses Vite proxy
-        window.location.href = 'http://localhost:3000/api/auth/github';
+    const login = async (username: string, password: string): Promise<{ success: boolean; error?: string }> => {
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                return { success: false, error: data.error || 'Login gagal' };
+            }
+
+            setUser(data.user);
+            return { success: true };
+        } catch (error) {
+            console.error('Login failed:', error);
+            return { success: false, error: 'Koneksi error. Coba lagi.' };
+        }
     };
 
     const logout = async () => {

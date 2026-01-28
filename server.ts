@@ -11,12 +11,11 @@ import cors from 'cors';
 import multer from 'multer';
 import path from 'path';
 import { getDb, projects, experience, publications, certifications, adminUsers, sessions, profile, tools, services, stats, fileRegistry } from './src/lib/db.js';
-import { github, isAllowedAdmin, generateSessionId, getSessionExpiry, SESSION_COOKIE_NAME } from './src/lib/auth.js';
+import { hashPassword, verifyPassword, generateSessionId, getSessionExpiry, SESSION_COOKIE_NAME } from './src/lib/auth.js';
 import { FileService } from './src/lib/FileService.js';
 import { DEFAULTS } from './src/lib/defaults.js';
 import fs from 'fs';
 import { eq } from 'drizzle-orm';
-import { generateState } from 'arctic';
 import cookieParser from 'cookie-parser';
 
 const app = express();
@@ -125,63 +124,39 @@ app.post('/api/upload', requireAuth, upload.single('image'), async (req, res) =>
 
 // ==================== AUTH ROUTES ====================
 
-// GET /api/auth/github - Start OAuth
-app.get('/api/auth/github', (req, res) => {
-    const state = generateState();
-    const url = github.createAuthorizationURL(state, ['read:user', 'user:email']);
+// POST /api/auth/login - Manual login with username/password
+app.post('/api/auth/login', async (req, res) => {
+    const { username, password } = req.body;
 
-    const redirectUri = url.searchParams.get('redirect_uri');
-    console.log(`[AUTH DEBUG] Initiating GitHub login.`);
-    console.log(`[AUTH DEBUG] Client ID: ${process.env.GITHUB_CLIENT_ID}`);
-    console.log(`[AUTH DEBUG] Redirect URI Sent: ${redirectUri}`);
-    console.log(`[AUTH DEBUG] Full URL: ${url.toString()}`);
-
-    res.cookie('github_oauth_state', state, { httpOnly: true, maxAge: 600000 });
-    res.redirect(url.toString());
-});
-
-// GET /api/auth/github/callback - OAuth callback
-app.get('/api/auth/github/callback', async (req, res) => {
-    const { code, state } = req.query;
-    const storedState = req.cookies?.github_oauth_state;
-
-    if (!code || !state || state !== storedState) {
-        return res.redirect(`${APP_URL}/admin/login?error=invalid_state`);
+    if (!username || !password) {
+        return res.status(400).json({ error: 'Username dan password wajib diisi' });
     }
 
     try {
-        const tokens = await github.validateAuthorizationCode(code as string);
-        const userRes = await fetch('https://api.github.com/user', {
-            headers: { Authorization: `Bearer ${tokens.accessToken()}`, Accept: 'application/json' },
-        });
-        const githubUser: any = await userRes.json();
-
-        if (!isAllowedAdmin(githubUser.id.toString(), githubUser.login)) {
-            return res.redirect(`${APP_URL}/admin/login?error=not_authorized`);
-        }
-
         const db = getDb();
-        let user = await db.select().from(adminUsers).where(eq(adminUsers.githubId, githubUser.id.toString())).limit(1).then(r => r[0]);
+        const user = await db.select().from(adminUsers).where(eq(adminUsers.username, username)).limit(1).then(r => r[0]);
 
         if (!user) {
-            const [newUser] = await db.insert(adminUsers).values({
-                githubId: githubUser.id.toString(),
-                username: githubUser.login,
-                email: githubUser.email,
-                avatarUrl: githubUser.avatar_url,
-            }).returning();
-            user = newUser;
+            return res.status(401).json({ error: 'Username atau password salah' });
         }
 
+        const isValid = await verifyPassword(password, user.passwordHash);
+        if (!isValid) {
+            return res.status(401).json({ error: 'Username atau password salah' });
+        }
+
+        // Create session
         const sessionId = generateSessionId();
         await db.insert(sessions).values({ id: sessionId, userId: user.id, expiresAt: getSessionExpiry() });
 
-        res.clearCookie('github_oauth_state');
         res.cookie(SESSION_COOKIE_NAME, sessionId, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
-        res.redirect(`${APP_URL}/admin`);
+        res.json({
+            success: true,
+            user: { id: user.id, username: user.username, email: user.email, avatarUrl: user.avatarUrl }
+        });
     } catch (e) {
-        console.error('OAuth error:', e);
-        res.redirect(`${APP_URL}/admin/login?error=callback_failed`);
+        console.error('Login error:', e);
+        res.status(500).json({ error: 'Login failed' });
     }
 });
 

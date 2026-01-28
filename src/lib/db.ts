@@ -8,11 +8,11 @@ import { fileURLToPath } from 'url';
 // DATABASE SCHEMAS
 // ======================
 
-// Admin Users (GitHub OAuth)
+// Admin Users (Manual Login)
 export const adminUsers = sqliteTable('admin_users', {
   id: text('id').primaryKey().$defaultFn(() => crypto.randomUUID()),
-  githubId: text('github_id').notNull().unique(),
-  username: text('username').notNull(),
+  username: text('username').notNull().unique(),
+  passwordHash: text('password_hash').notNull(),
   email: text('email'),
   avatarUrl: text('avatar_url'),
   createdAt: text('created_at').$defaultFn(() => new Date().toISOString()),
