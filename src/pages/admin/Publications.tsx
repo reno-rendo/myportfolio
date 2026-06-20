@@ -50,6 +50,7 @@ export function PublicationsPage() {
                 method: editingId ? 'PUT' : 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
+                credentials: 'include',
             });
             resetForm();
             fetchData();
@@ -58,7 +59,7 @@ export function PublicationsPage() {
 
     const handleDelete = async (id: string) => {
         if (!confirm('Delete this publication?')) return;
-        await fetch(`/api/publications?id=${id}`, { method: 'DELETE' });
+        await fetch(`/api/publications?id=${id}`, { method: 'DELETE', credentials: 'include' });
         fetchData();
     };
 
