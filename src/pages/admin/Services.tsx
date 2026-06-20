@@ -57,6 +57,7 @@ export function ServicesPage() {
                 method: editingId ? 'PUT' : 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
+                credentials: 'include',
             });
             resetForm();
             fetchData();
@@ -65,7 +66,7 @@ export function ServicesPage() {
 
     const handleDelete = async (id: string) => {
         if (!confirm('Delete this service?')) return;
-        await fetch(`/api/services?id=${id}`, { method: 'DELETE' });
+        await fetch(`/api/services?id=${id}`, { method: 'DELETE', credentials: 'include' });
         fetchData();
     };
 
