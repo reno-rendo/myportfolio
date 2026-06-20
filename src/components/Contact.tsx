@@ -147,7 +147,6 @@ export const Contact = () => {
   }, [isSuccess]);
 
   const onSubmit = async (values: ContactFormValues) => {
-    // Check Turnstile token
     if (!turnstileToken) {
       setTurnstileError('Harap selesaikan verifikasi terlebih dahulu');
       return;
@@ -156,31 +155,27 @@ export const Contact = () => {
     setIsSubmitting(true);
     setIsSuccess(false);
 
-    const formUrl =
-      'https://docs.google.com/forms/d/e/1FAIpQLSe9Sv48rk9Az-yztqHirvHKI6c2JRwZpSrInYiNukrOCwU3_w/viewform?usp=dialog';
-
-    const formData = new FormData();
-    formData.append('entry.504361379', values.name);
-    formData.append('entry.1061438495', values.company);
-    formData.append('entry.591074169', values.email);
-    formData.append('entry.1382094980', values.phone);
-    formData.append('entry.1046213113', values.message);
-
     try {
-      await fetch(formUrl, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        body: formData,
-        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
       });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || 'Failed to send message');
+      }
 
       form.reset();
       setIsSuccess(true);
 
-      // Reset Turnstile after successful submission
       if (window.turnstile && widgetIdRef.current) {
         window.turnstile.reset(widgetIdRef.current);
         setTurnstileToken(null);
       }
+    } catch (err) {
+      setTurnstileError(err instanceof Error ? err.message : 'Failed to send. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
