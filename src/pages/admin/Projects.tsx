@@ -94,12 +94,14 @@ export function ProjectsPage() {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),
+                    credentials: 'include',
                 });
             } else {
                 await fetch('/api/projects', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(body),
+                    credentials: 'include',
                 });
             }
             resetForm();
@@ -112,7 +114,7 @@ export function ProjectsPage() {
     const handleDelete = async (id: string) => {
         if (!confirm('Are you sure you want to delete this project?')) return;
         try {
-            await fetch(`/api/projects/${id}`, { method: 'DELETE' });
+            await fetch(`/api/projects/${id}`, { method: 'DELETE', credentials: 'include' });
             fetchProjects();
         } catch (error) {
             console.error('Failed to delete:', error);
