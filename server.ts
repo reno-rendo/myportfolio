@@ -64,7 +64,21 @@ const upload = multer({
 });
 
 // Middleware
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+const allowedOrigins = [
+    'http://localhost:5173',
+    process.env.APP_URL,
+].filter(Boolean) as string[];
+
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin) || /\.vercel\.app$/.test(origin)) {
+            return callback(null, true);
+        }
+        callback(new Error('Not allowed by CORS'));
+    },
+    credentials: true,
+}));
 app.use(express.json());
 app.use(cookieParser());
 // Serve uploaded files
@@ -177,7 +191,13 @@ app.post('/api/auth/login', async (req, res) => {
         const sessionId = generateSessionId();
         await db.insert(sessions).values({ id: sessionId, userId: user.id, expiresAt: getSessionExpiry() });
 
-        res.cookie(SESSION_COOKIE_NAME, sessionId, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 });
+        const isProd = isVercel || process.env.NODE_ENV === 'production';
+        res.cookie(SESSION_COOKIE_NAME, sessionId, {
+            httpOnly: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            secure: isProd,
+            sameSite: isProd ? 'none' : 'lax',
+        });
         res.json({
             success: true,
             user: { id: user.id, username: user.username, email: user.email, avatarUrl: user.avatarUrl }
@@ -637,8 +657,6 @@ const startScheduledTasks = () => {
 
 // Start server if not in Vercel/Serverless environment
 // Vercel usually sets process.env.VERCEL or we can check if file is being run directly
-const isVercel = process.env.VERCEL === '1';
-
 if (!isVercel) {
     app.listen(PORT, async () => {
         console.log(`\n🚀 API Server running at http://localhost:${PORT}`);
