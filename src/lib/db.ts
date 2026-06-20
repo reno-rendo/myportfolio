@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
