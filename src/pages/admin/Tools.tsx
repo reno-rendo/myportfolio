@@ -47,6 +47,7 @@ export function ToolsPage() {
                 method: editingId ? 'PUT' : 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
+                credentials: 'include',
             });
             resetForm();
             fetchData();
@@ -55,7 +56,7 @@ export function ToolsPage() {
 
     const handleDelete = async (id: string) => {
         if (!confirm('Delete this tool?')) return;
-        await fetch(`/api/tools?id=${id}`, { method: 'DELETE' });
+        await fetch(`/api/tools?id=${id}`, { method: 'DELETE', credentials: 'include' });
         fetchData();
     };
 
