@@ -109,6 +109,7 @@ export function SettingsPage() {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
+                credentials: 'include',
             });
 
             if (res.ok) {
@@ -147,6 +148,7 @@ export function SettingsPage() {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ currentPassword, newPassword }),
+                credentials: 'include',
             });
 
             const data = await res.json();
@@ -363,7 +365,7 @@ export function SettingsPage() {
                 <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
                         <span className="text-zinc-400">Database</span>
-                        <span className="text-green-500">SQLite (Local)</span>
+                        <span className="text-green-500">Turso (Remote)</span>
                     </div>
                     <div className="flex justify-between">
                         <span className="text-zinc-400">Authentication</span>
