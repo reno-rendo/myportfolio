@@ -23,7 +23,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const checkAuth = async () => {
         try {
-            const res = await fetch('/api/auth/me');
+            const res = await fetch('/api/auth/me', { credentials: 'include' });
             const data = await res.json();
             setUser(data.user || null);
         } catch (error) {
@@ -40,6 +40,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password }),
+                credentials: 'include',
             });
 
             const data = await res.json();
@@ -58,7 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     const logout = async () => {
         try {
-            await fetch('/api/auth/me', { method: 'DELETE' });
+            await fetch('/api/auth/me', { method: 'DELETE', credentials: 'include' });
             setUser(null);
             window.location.href = '/admin/login';
         } catch (error) {
