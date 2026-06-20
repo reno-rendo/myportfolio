@@ -17,6 +17,7 @@ import { DEFAULTS } from './src/lib/defaults.js';
 import fs from 'fs';
 import { eq } from 'drizzle-orm';
 import cookieParser from 'cookie-parser';
+import nodemailer from 'nodemailer';
 
 const app = express();
 const PORT = 3000;
@@ -607,6 +608,63 @@ app.delete('/api/stats', requireAuth, async (req, res) => {
         res.json({ success: true });
     } catch (e) {
         res.status(500).json({ error: 'Failed to delete' });
+    }
+});
+
+// ==================== CONTACT EMAIL ====================
+
+app.post('/api/contact', async (req, res) => {
+    try {
+        const { name, company, email, phone, message } = req.body;
+
+        if (!name || !email || !message) {
+            res.status(400).json({ error: 'Name, email, and message are required.' });
+            return;
+        }
+
+        const gmailUser = process.env.GMAIL_USER;
+        const gmailPass = process.env.GMAIL_APP_PASSWORD;
+
+        if (!gmailUser || !gmailPass) {
+            console.error('Gmail credentials not configured');
+            res.status(500).json({ error: 'Email service not configured.' });
+            return;
+        }
+
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: { user: gmailUser, pass: gmailPass },
+        });
+
+        await transporter.sendMail({
+            from: `"Portfolio Contact" <${gmailUser}>`,
+            to: gmailUser,
+            replyTo: email,
+            subject: `New Contact from ${name}${company ? ` (${company})` : ''}`,
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+                    <h2 style="color: #333; border-bottom: 2px solid #333; padding-bottom: 10px;">New Contact Message</h2>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr><td style="padding: 8px 0; color: #666; width: 120px;"><strong>Name</strong></td><td style="padding: 8px 0;">${name}</td></tr>
+                        ${company ? `<tr><td style="padding: 8px 0; color: #666;"><strong>Company</strong></td><td style="padding: 8px 0;">${company}</td></tr>` : ''}
+                        <tr><td style="padding: 8px 0; color: #666;"><strong>Email</strong></td><td style="padding: 8px 0;"><a href="mailto:${email}">${email}</a></td></tr>
+                        ${phone ? `<tr><td style="padding: 8px 0; color: #666;"><strong>Phone</strong></td><td style="padding: 8px 0;">${phone}</td></tr>` : ''}
+                    </table>
+                    <div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 6px;">
+                        <strong style="color: #333;">Message:</strong>
+                        <p style="margin: 10px 0 0; color: #444; white-space: pre-line;">${message}</p>
+                    </div>
+                    <p style="margin-top: 20px; color: #999; font-size: 12px;">Sent from your portfolio contact form.</p>
+                </div>
+            `,
+        });
+
+        res.json({ success: true });
+    } catch (e) {
+        console.error('Contact email error:', e);
+        res.status(500).json({ error: 'Failed to send email. Please try again.' });
     }
 });
 
