@@ -59,12 +59,14 @@ export function ExperiencePage() {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData),
+                    credentials: 'include',
                 });
             } else {
                 await fetch('/api/experience', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData),
+                    credentials: 'include',
                 });
             }
             resetForm();
@@ -77,7 +79,7 @@ export function ExperiencePage() {
     const handleDelete = async (id: string) => {
         if (!confirm('Delete this entry?')) return;
         try {
-            await fetch(`/api/experience?id=${id}`, { method: 'DELETE' });
+            await fetch(`/api/experience?id=${id}`, { method: 'DELETE', credentials: 'include' });
             fetchData();
         } catch (error) {
             console.error('Failed to delete:', error);
