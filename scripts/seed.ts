@@ -1,17 +1,15 @@
 /**
- * Seed script to migrate data from constants/index.tsx to local SQLite database
- * Run with: npm run db:seed
+ * Seed script untuk mengisi data ke database Turso
+ * Run dengan: npx tsx scripts/seed.ts
+ * Pastikan TURSO_DATABASE_URL dan TURSO_AUTH_TOKEN sudah di-set di .env
  */
 
-import Database from 'better-sqlite3';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
+import 'dotenv/config';
+import { getDb } from '../src/lib/db';
 import * as schema from '../src/lib/db';
 
-// Database path
-const sqlite = new Database('./sqlite.db');
-const db = drizzle(sqlite, { schema });
+const db = getDb();
 
-// Data from constants/index.tsx
 const projectsData = [
     {
         title: 'National Police Personnel Data Search System',
@@ -131,43 +129,37 @@ const certificationsData = [
 ];
 
 async function seed() {
-    console.log('🌱 Starting seed...\n');
+    console.log('🌱 Starting seed to Turso...\n');
 
-    // Seed Projects
     console.log('📁 Seeding projects...');
     for (const project of projectsData) {
         await db.insert(schema.projects).values(project);
     }
     console.log(`   ✅ ${projectsData.length} projects added\n`);
 
-    // Seed Experience
     console.log('💼 Seeding experience...');
     for (const exp of experienceData) {
         await db.insert(schema.experience).values(exp);
     }
     console.log(`   ✅ ${experienceData.length} experience entries added\n`);
 
-    // Seed Publications
     console.log('📚 Seeding publications...');
     for (const pub of publicationsData) {
         await db.insert(schema.publications).values(pub);
     }
     console.log(`   ✅ ${publicationsData.length} publications added\n`);
 
-    // Seed Certifications
     console.log('🎖️ Seeding certifications...');
     for (const cert of certificationsData) {
         await db.insert(schema.certifications).values(cert);
     }
     console.log(`   ✅ ${certificationsData.length} certifications added\n`);
 
-    console.log('✨ Seed completed successfully!');
-    sqlite.close();
+    console.log('✨ Seed to Turso completed successfully!');
     process.exit(0);
 }
 
 seed().catch((e) => {
     console.error('❌ Seed failed:', e);
-    sqlite.close();
     process.exit(1);
 });
