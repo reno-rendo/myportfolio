@@ -292,14 +292,14 @@ app.put('/api/projects/:id', requireAuth, async (req, res) => {
         const db = getDb();
 
         // 1. Get old project data
-        const oldProject = await db.select().from(projects).where(eq(projects.id, req.params.id)).limit(1).then(r => r[0]);
+        const oldProject = await db.select().from(projects).where(eq(projects.id, req.params.id as string)).limit(1).then(r => r[0]);
 
         if (oldProject && oldProject.imageUrl && req.body.imageUrl && oldProject.imageUrl !== req.body.imageUrl) {
             // 2. Deregister old file reference
             await FileService.deregisterByPath(oldProject.imageUrl);
         }
 
-        const [item] = await db.update(projects).set(req.body).where(eq(projects.id, req.params.id)).returning();
+        const [item] = await db.update(projects).set(req.body).where(eq(projects.id, req.params.id as string)).returning();
         res.json(item);
     } catch (e) {
         res.status(500).json({ error: 'Failed to update' });
@@ -310,14 +310,14 @@ app.delete('/api/projects/:id', requireAuth, async (req, res) => {
     try {
         const db = getDb();
         // 1. Get current project to check for image
-        const project = await db.select().from(projects).where(eq(projects.id, req.params.id)).limit(1).then(r => r[0]);
+        const project = await db.select().from(projects).where(eq(projects.id, req.params.id as string)).limit(1).then(r => r[0]);
 
         if (project && project.imageUrl) {
             // 2. Deregister file reference
             await FileService.deregisterByPath(project.imageUrl);
         }
 
-        await db.delete(projects).where(eq(projects.id, req.params.id));
+        await db.delete(projects).where(eq(projects.id, req.params.id as string));
         res.json({ success: true });
     } catch (e) {
         res.status(500).json({ error: 'Failed to delete' });
@@ -623,7 +623,6 @@ const seedDefaults = async () => {
             await db.insert(adminUsers).values({
                 username: 'admin',
                 passwordHash: hash,
-                role: 'admin'
             });
             console.log('✅ Admin seeded!');
         }
